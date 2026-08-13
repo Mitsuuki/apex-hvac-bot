@@ -3,51 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex Home Services - Live Prototype</title>
+    <title>Apex Home Services | Fast, Reliable HVAC & Plumbing</title>
     <style>
-        body { font-family: 'Inter', sans-serif; background: #f3f4f6; margin: 0; padding: 20px; display: flex; height: 100vh; box-sizing: border-box; }
-        .glass-house { flex: 1; display: flex; flex-direction: column; gap: 20px; padding: 20px; }
-        h1 { color: #1f2937; margin-bottom: 5px; }
-        .subtitle { color: #6b7280; font-size: 14px; margin-top: 0; margin-bottom: 20px; }
-        iframe { width: 100%; height: 400px; border: none; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); background: white; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
         
-        /* Premium Custom Chat Widget */
-        .chat-container { width: 400px; background: white; border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); display: flex; flex-direction: column; overflow: hidden; margin-left: 20px; border: 1px solid #e5e7eb; }
-        .chat-header { background: #2563eb; color: white; padding: 20px; font-weight: bold; display: flex; align-items: center; gap: 10px; }
-        .chat-header .dot { width: 10px; height: 10px; background: #10b981; border-radius: 50%; }
-        .chat-box { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: #f9fafb; height: 400px; }
-        .msg { max-width: 80%; padding: 12px 16px; border-radius: 12px; font-size: 14px; line-height: 1.4; word-wrap: break-word; }
+        body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; background: #f9fafb; overflow-x: hidden; }
+        
+        /* Navigation Header */
+        header { background: white; padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: relative; z-index: 10; }
+        .logo { font-size: 24px; font-weight: 800; color: #1e3a8a; display: flex; align-items: center; gap: 10px; }
+        .dev-btn { background: #111827; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 8px; }
+        .dev-btn:hover { background: #374151; }
+        
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, #1e40af, #2563eb); color: white; padding: 100px 50px; text-align: center; }
+        .hero h1 { font-size: 48px; margin-bottom: 20px; font-weight: 800; }
+        .hero p { font-size: 20px; opacity: 0.9; max-width: 650px; margin: 0 auto 40px auto; line-height: 1.5; }
+        .hero-features { display: flex; justify-content: center; gap: 30px; margin-top: 40px; flex-wrap: wrap; }
+        .feature { background: rgba(255,255,255,0.12); padding: 24px; border-radius: 12px; backdrop-filter: blur(10px); width: 220px; text-align: left; }
+        .feature strong { font-size: 18px; display: block; margin-bottom: 6px; }
+        .feature span { font-size: 14px; opacity: 0.85; }
+
+        /* Floating Chat Widget (Bottom Right) */
+        .chat-container { position: fixed; bottom: 30px; right: 30px; width: 380px; background: white; border-radius: 16px; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.2); display: flex; flex-direction: column; overflow: hidden; border: 1px solid #e5e7eb; z-index: 100; }
+        .chat-header { background: #2563eb; color: white; padding: 16px 20px; font-weight: bold; display: flex; align-items: center; gap: 10px; }
+        .chat-header .dot { width: 10px; height: 10px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px #10b981; }
+        .chat-box { height: 380px; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: #f9fafb; }
+        .msg { max-width: 85%; padding: 12px 16px; border-radius: 12px; font-size: 14px; line-height: 1.4; word-wrap: break-word; }
         .msg.bot { background: white; align-self: flex-start; border: 1px solid #e5e7eb; border-bottom-left-radius: 2px; }
         .msg.user { background: #2563eb; color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
         .chat-input-area { padding: 15px; background: white; border-top: 1px solid #e5e7eb; display: flex; gap: 10px; }
-        input[type="text"] { flex: 1; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; outline: none; transition: border 0.2s; }
+        input[type="text"] { flex: 1; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; outline: none; }
         input[type="text"]:focus { border-color: #2563eb; }
-        button { background: #2563eb; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: background 0.2s; }
-        button:hover { background: #1d4ed8; }
-        button:disabled { background: #9ca3af; cursor: not-allowed; }
+        .send-btn { background: #2563eb; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+        .send-btn:hover { background: #1d4ed8; }
+        .send-btn:disabled { background: #9ca3af; cursor: not-allowed; }
         
-        /* Dynamic Quick Reply Buttons */
+        /* Quick Reply Buttons */
         .btn-container { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; margin-top: 5px; }
-        .quick-reply { background: white; border: 1px solid #2563eb; color: #2563eb; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 13px; transition: all 0.2s; }
+        .quick-reply { background: white; border: 1px solid #2563eb; color: #2563eb; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: 600; transition: 0.2s; }
         .quick-reply:hover { background: #eff6ff; }
+
+        /* Slide-Out Control Panel (Dev Mode) */
+        .backend-panel { position: fixed; top: 0; left: -550px; width: 500px; height: 100vh; background: #111827; color: white; z-index: 200; padding: 30px; box-sizing: border-box; overflow-y: auto; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 10px 0 30px rgba(0,0,0,0.5); }
+        .backend-panel.open { left: 0; }
+        .backend-panel h2 { margin-top: 0; border-bottom: 1px solid #374151; padding-bottom: 15px; color: #60a5fa; display: flex; align-items: center; justify-content: space-between; }
+        .close-btn { background: transparent; color: #9ca3af; border: none; font-size: 24px; cursor: pointer; }
+        .close-btn:hover { color: white; }
+        .iframe-container { margin-bottom: 25px; background: white; border-radius: 8px; overflow: hidden; height: 320px; }
+        .iframe-container iframe { width: 100%; height: 100%; border: none; }
+        .panel-label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #9ca3af; margin-bottom: 8px; display: block; font-weight: 600; }
     </style>
 </head>
 <body>
 
-    <!-- Left Side: The Backend Proof (Glass House) -->
-    <div class="glass-house">
-        <div>
-            <h1>🛠️ Apex Home Services</h1>
-            <p class="subtitle">Live Backend Dashboard (Google Calendar & CRM Sync)</p>
-        </div>
-        <!-- Replace with your actual public Google Calendar Embed -->
-        <iframe src="https://calendar.google.com/calendar/embed?src=sakuramisakikawaii%40gmail.com&ctz=Asia%2FManila"></iframe>
+    <!-- Slide-Out Backend Control Room -->
+    <div class="backend-panel" id="backendPanel">
+        <h2>
+            <span>⚙️ System Backend</span>
+            <button class="close-btn" onclick="toggleBackend()">×</button>
+        </h2>
+        <p style="color: #9ca3af; font-size: 14px; margin-bottom: 25px; line-height: 1.5;">This control room displays real-time data synchronization between the web frontend, Google Calendar, and Google Sheets CRM.</p>
         
-        <!-- Replace with your actual published Google Sheet Embed -->
-        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2No54tpOdLhI3xUyJf0few-si1qAvoKpib1KIuZM7AlQiJElqZCGtOXKL1PQQqC1vtlB3IyA4wdmW/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+        <span class="panel-label">Live Dispatch Calendar</span>
+        <div class="iframe-container">
+            <iframe src="https://calendar.google.com/calendar/embed?src=sakuramisakikawaii%40gmail.com&ctz=Asia%2FManila"></iframe>
+        </div>
+
+        <span class="panel-label">Live Database (Chat History)</span>
+        <div class="iframe-container">
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2No54tpOdLhI3xUyJf0few-si1qAvoKpib1KIuZM7AlQiJElqZCGtOXKL1PQQqC1vtlB3IyA4wdmW/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+        </div>
     </div>
 
-    <!-- Right Side: The Premium Chat Widget -->
+    <!-- Main Landing Page -->
+    <header>
+        <div class="logo">🛠️ Apex Home Services</div>
+        <button class="dev-btn" onclick="toggleBackend()">⚙️ View Backend (Dev Mode)</button>
+    </header>
+
+    <section class="hero">
+        <h1>Fast, Professional AC & Plumbing Repair</h1>
+        <p>Don't sweat the heat or stress over leaks. Our certified technicians are on call 24/7. Chat with our AI Dispatcher below to receive instant pricing and lock in your appointment.</p>
+        
+        <div class="hero-features">
+            <div class="feature">
+                <strong>Instant Quotes</strong>
+                <span>Calculated directly from our service rates.</span>
+            </div>
+            <div class="feature">
+                <strong>Live Dispatch</strong>
+                <span>Syncs directly to technician calendars.</span>
+            </div>
+            <div class="feature">
+                <strong>24/7 Response</strong>
+                <span>Automated dispatching with human oversight.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat Widget -->
     <div class="chat-container">
         <div class="chat-header">
             <div class="dot"></div> Apex AI Dispatcher
@@ -57,14 +112,18 @@
         </div>
         <div class="chat-input-area">
             <input type="text" id="user-input" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
-            <button id="send-btn" onclick="sendMessage()">Send</button>
+            <button class="send-btn" id="send-btn" onclick="sendMessage()">Send</button>
         </div>
     </div>
 
     <script>
-        // --- PASTE YOUR N8N WEBHOOK URL HERE ---
-        const N8N_WEBHOOK_URL = "http://localhost:5678/webhook/apex-web-chat"; 
+        // Exact Cloudflare Webhook URL
+        const N8N_WEBHOOK_URL = "https://magnet-sustainable-circular-hopes.trycloudflare.com/webhook/apex-web-chat"; 
         
+        function toggleBackend() {
+            document.getElementById('backendPanel').classList.toggle('open');
+        }
+
         const sessionId = "session_" + Math.floor(Math.random() * 1000000000);
         const chatBox = document.getElementById("chat-box");
         const userInput = document.getElementById("user-input");
