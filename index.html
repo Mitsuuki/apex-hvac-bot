@@ -52,7 +52,7 @@
         .section-title h2 { font-size: 36px; font-weight: 800; color: var(--dark); margin-bottom: 10px; letter-spacing: -0.5px; }
         .section-title p { color: var(--slate); font-size: 16px; }
         
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         .service-card { background: white; border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); }
         .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.08); }
         .service-img { height: 200px; background-size: cover; background-position: center; }
@@ -63,10 +63,18 @@
         .service-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f1f5f9; padding-top: 15px; font-weight: 700; font-size: 16px; color: var(--dark); }
         .service-footer span { color: var(--primary); font-size: 14px; cursor: pointer; }
 
-        /* Floating Chat Widget (Bottom Right) */
-        .chat-container { position: fixed; bottom: 30px; right: 30px; width: 380px; background: white; border-radius: 20px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); display: flex; flex-direction: column; overflow: hidden; border: 1px solid #e2e8f0; z-index: 100; animation: bounceIn 0.4s ease-out; }
-        .chat-header { background: var(--primary); color: white; padding: 18px 20px; font-weight: 700; display: flex; align-items: center; gap: 12px; }
+        /* Chat Toggle Button */
+        .chat-toggle { position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 28px; box-shadow: 0 10px 25px rgba(37,99,235,0.4); cursor: pointer; z-index: 101; transition: transform 0.2s ease; display: flex; align-items: center; justify-content: center; }
+        .chat-toggle:hover { transform: scale(1.05); background: var(--primary-dark); }
+
+        /* Floating Chat Widget */
+        .chat-container { position: fixed; bottom: 110px; right: 30px; width: 380px; background: white; border-radius: 20px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); display: flex; flex-direction: column; overflow: hidden; border: 1px solid #e2e8f0; z-index: 100; transform: scale(0); transform-origin: bottom right; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 0; pointer-events: none; }
+        .chat-container.open { transform: scale(1); opacity: 1; pointer-events: auto; }
+        .chat-header { background: var(--primary); color: white; padding: 18px 20px; font-weight: 700; display: flex; align-items: center; justify-content: space-between; }
+        .chat-header-left { display: flex; align-items: center; gap: 12px; }
         .chat-header .dot { width: 10px; height: 10px; background: #34d399; border-radius: 50%; box-shadow: 0 0 10px #34d399; }
+        .close-chat-btn { background: none; border: none; color: white; font-size: 24px; cursor: pointer; line-height: 1; padding: 0; opacity: 0.8; transition: 0.2s; }
+        .close-chat-btn:hover { opacity: 1; }
         .chat-box { height: 380px; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; background: #f8fafc; }
         .msg { max-width: 85%; padding: 12px 16px; border-radius: 14px; font-size: 14px; line-height: 1.4; word-wrap: break-word; }
         .msg.bot { background: white; align-self: flex-start; border: 1px solid #e2e8f0; border-bottom-left-radius: 4px; color: var(--dark); box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
@@ -87,11 +95,32 @@
         .backend-panel { position: fixed; top: 0; left: -550px; width: 500px; height: 100vh; background: #0b0f19; color: white; z-index: 200; padding: 30px; box-sizing: border-box; overflow-y: auto; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 20px 0 50px rgba(0,0,0,0.5); border-right: 1px solid #1e293b; }
         .backend-panel.open { left: 0; }
         .backend-panel h2 { margin-top: 0; border-bottom: 1px solid #1e293b; padding-bottom: 15px; color: #60a5fa; display: flex; align-items: center; justify-content: space-between; font-size: 18px; }
-        .close-btn { background: transparent; color: #94a3b8; border: none; font-size: 24px; cursor: pointer; }
-        .close-btn:hover { color: white; }
+        .panel-close-btn { background: transparent; color: #94a3b8; border: none; font-size: 24px; cursor: pointer; }
+        .panel-close-btn:hover { color: white; }
         .iframe-container { margin-bottom: 25px; background: white; border-radius: 12px; overflow: hidden; height: 300px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         .iframe-container iframe { width: 100%; height: 100%; border: none; }
         .panel-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #94a3b8; margin-bottom: 8px; display: block; font-weight: 700; }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            header { padding: 15px 20px; flex-direction: column; gap: 15px; }
+            .hero { padding: 80px 20px 60px; }
+            .hero h1 { font-size: 36px; }
+            .trust-strip { flex-direction: column; gap: 20px; align-items: center; text-align: center; padding: 20px; }
+            .section-title h2 { font-size: 28px; }
+            
+            /* Responsive Dev Panel */
+            .backend-panel { width: 100%; left: -100%; padding: 20px; }
+            
+            /* Responsive Chat Widget */
+            .chat-toggle { bottom: 20px; right: 20px; width: 55px; height: 55px; font-size: 24px; }
+            .chat-container { 
+                width: calc(100% - 40px); 
+                right: 20px; 
+                bottom: 85px; 
+            }
+            .chat-box { height: 350px; }
+        }
     </style>
 </head>
 <body>
@@ -100,7 +129,7 @@
     <div class="backend-panel" id="backendPanel">
         <h2>
             <span>⚙️ Architecture Control Room</span>
-            <button class="close-btn" onclick="toggleBackend()">×</button>
+            <button class="panel-close-btn" onclick="toggleBackend()">×</button>
         </h2>
         <p style="color: #94a3b8; font-size: 13px; margin-bottom: 25px; line-height: 1.6;">Live telemetry showing real-time event routing from the frontend UI into n8n Webhooks, Google Calendar, and CRM storage.</p>
         
@@ -153,7 +182,7 @@
                     <h3>AC Tune-Up & Cleaning</h3>
                     <p>Complete system multi-point inspection, coil cleaning, and performance optimization to lower your monthly electric bill.</p>
                     <div class="service-footer">
-                        $89.00 <span>Book via Chat &rarr;</span>
+                        $89.00 <span onclick="openChatWithPrefill('I need an AC Tune-Up')">Book via Chat &rarr;</span>
                     </div>
                 </div>
             </div>
@@ -165,7 +194,7 @@
                     <h3>AC Diagnostics & Repair</h3>
                     <p>Rapid troubleshooting for blowing warm air, strange noises, or compressor failures. Dispatch fee waived if repair is booked.</p>
                     <div class="service-footer">
-                        $49.00 Fee <span>Book via Chat &rarr;</span>
+                        $49.00 Fee <span onclick="openChatWithPrefill('I need an AC Repair')">Book via Chat &rarr;</span>
                     </div>
                 </div>
             </div>
@@ -177,17 +206,23 @@
                     <h3>Leaky Pipe & Plumbing Fix</h3>
                     <p>Professional pipe replacement, joint sealing, and pressure testing performed by certified Master Plumbers.</p>
                     <div class="service-footer">
-                        From $120.00 <span>Book via Chat &rarr;</span>
+                        From $120.00 <span onclick="openChatWithPrefill('I need a Plumbing Fix')">Book via Chat &rarr;</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Chat Toggle Button -->
+    <button class="chat-toggle" onclick="toggleChat()">💬</button>
+
     <!-- Floating Chat Widget -->
-    <div class="chat-container">
+    <div class="chat-container" id="chatContainer">
         <div class="chat-header">
-            <div class="dot"></div> Apex AI Dispatcher
+            <div class="chat-header-left">
+                <div class="dot"></div> Apex AI Dispatcher
+            </div>
+            <button class="close-chat-btn" onclick="toggleChat()">×</button>
         </div>
         <div class="chat-box" id="chat-box">
             <div class="msg bot">Hi there! Need an AC repair or plumbing fix? Let me know how I can help.</div>
@@ -204,6 +239,26 @@
         
         function toggleBackend() {
             document.getElementById('backendPanel').classList.toggle('open');
+        }
+
+        function toggleChat() {
+            const chat = document.getElementById('chatContainer');
+            chat.classList.toggle('open');
+            if (chat.classList.contains('open')) {
+                document.getElementById('user-input').focus();
+            }
+        }
+
+        // Open chat automatically after 1.5 seconds so the user knows it's there
+        setTimeout(() => {
+            document.getElementById('chatContainer').classList.add('open');
+        }, 1500);
+
+        function openChatWithPrefill(text) {
+            document.getElementById('chatContainer').classList.add('open');
+            const input = document.getElementById('user-input');
+            input.value = text;
+            input.focus();
         }
 
         const sessionId = "session_" + Math.floor(Math.random() * 1000000000);
