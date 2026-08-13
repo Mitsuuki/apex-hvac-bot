@@ -3,106 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex Home Services | Fast, Reliable HVAC & Plumbing</title>
+    <title>Apex Home Services | Premier HVAC & Plumbing Solutions</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         
-        body { font-family: 'Inter', sans-serif; margin: 0; padding: 0; background: #f9fafb; overflow-x: hidden; }
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --dark: #0f172a;
+            --slate: #475569;
+            --light: #f8fafc;
+            --accent: #f59e0b;
+        }
+
+        body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; padding: 0; background: var(--light); color: var(--dark); overflow-x: hidden; scroll-behavior: smooth; }
         
+        /* Top Announcement Bar */
+        .top-bar { background: var(--dark); color: white; text-align: center; padding: 10px; font-size: 13px; font-weight: 500; }
+        .top-bar span { color: var(--accent); font-weight: 700; }
+
         /* Navigation Header */
-        header { background: white; padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: relative; z-index: 10; }
-        .logo { font-size: 24px; font-weight: 800; color: #1e3a8a; display: flex; align-items: center; gap: 10px; }
-        .dev-btn { background: #111827; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 8px; }
-        .dev-btn:hover { background: #374151; }
+        header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 18px 50px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 50; border-bottom: 1px solid #e2e8f0; }
+        .logo { font-size: 20px; font-weight: 800; color: var(--dark); display: flex; align-items: center; gap: 10px; letter-spacing: -0.5px; }
+        .logo span { color: var(--primary); }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .dev-btn { background: #f1f5f9; color: var(--slate); border: 1px solid #cbd5e1; padding: 8px 16px; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 6px; }
+        .dev-btn:hover { background: #e2e8f0; color: var(--dark); }
         
-        /* Hero Section */
-        .hero { background: linear-gradient(135deg, #1e40af, #2563eb); color: white; padding: 100px 50px; text-align: center; }
-        .hero h1 { font-size: 48px; margin-bottom: 20px; font-weight: 800; }
-        .hero p { font-size: 20px; opacity: 0.9; max-width: 650px; margin: 0 auto 40px auto; line-height: 1.5; }
-        .hero-features { display: flex; justify-content: center; gap: 30px; margin-top: 40px; flex-wrap: wrap; }
-        .feature { background: rgba(255,255,255,0.12); padding: 24px; border-radius: 12px; backdrop-filter: blur(10px); width: 220px; text-align: left; }
-        .feature strong { font-size: 18px; display: block; margin-bottom: 6px; }
-        .feature span { font-size: 14px; opacity: 0.85; }
+        /* Immersive Hero Section */
+        .hero { 
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.75)), url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=1920') center/cover no-repeat; 
+            color: white; 
+            padding: 120px 20px 100px 20px; 
+            text-align: center; 
+        }
+        .hero-badge { background: rgba(37, 99, 235, 0.2); border: 1px solid rgba(37, 99, 235, 0.4); color: #60a5fa; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 20px; }
+        .hero h1 { font-size: 52px; font-weight: 800; margin-bottom: 20px; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.15; letter-spacing: -1px; }
+        .hero p { font-size: 18px; opacity: 0.9; max-width: 600px; margin: 0 auto 40px auto; line-height: 1.6; color: #cbd5e1; }
+        
+        /* Trust Badges Bar */
+        .trust-strip { background: white; padding: 30px 50px; display: flex; justify-content: center; gap: 60px; border-bottom: 1px solid #e2e8f0; flex-wrap: wrap; }
+        .trust-item { display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 14px; color: var(--slate); }
+        .trust-item span { color: var(--primary); font-size: 20px; }
+
+        /* Services Grid Section */
+        .services-section { max-width: 1200px; margin: 80px auto; padding: 0 20px; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 36px; font-weight: 800; color: var(--dark); margin-bottom: 10px; letter-spacing: -0.5px; }
+        .section-title p { color: var(--slate); font-size: 16px; }
+        
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; }
+        .service-card { background: white; border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.08); }
+        .service-img { height: 200px; background-size: cover; background-position: center; }
+        .service-content { padding: 30px; }
+        .service-tag { color: var(--primary); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: block; }
+        .service-card h3 { font-size: 20px; font-weight: 700; margin: 0 0 10px 0; color: var(--dark); }
+        .service-card p { color: var(--slate); font-size: 14px; line-height: 1.5; margin-bottom: 20px; }
+        .service-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f1f5f9; padding-top: 15px; font-weight: 700; font-size: 16px; color: var(--dark); }
+        .service-footer span { color: var(--primary); font-size: 14px; cursor: pointer; }
 
         /* Floating Chat Widget (Bottom Right) */
-        .chat-container { position: fixed; bottom: 30px; right: 30px; width: 380px; background: white; border-radius: 16px; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.2); display: flex; flex-direction: column; overflow: hidden; border: 1px solid #e5e7eb; z-index: 100; }
-        .chat-header { background: #2563eb; color: white; padding: 16px 20px; font-weight: bold; display: flex; align-items: center; gap: 10px; }
-        .chat-header .dot { width: 10px; height: 10px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px #10b981; }
-        .chat-box { height: 380px; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: #f9fafb; }
-        .msg { max-width: 85%; padding: 12px 16px; border-radius: 12px; font-size: 14px; line-height: 1.4; word-wrap: break-word; }
-        .msg.bot { background: white; align-self: flex-start; border: 1px solid #e5e7eb; border-bottom-left-radius: 2px; }
-        .msg.user { background: #2563eb; color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
-        .chat-input-area { padding: 15px; background: white; border-top: 1px solid #e5e7eb; display: flex; gap: 10px; }
-        input[type="text"] { flex: 1; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; outline: none; }
-        input[type="text"]:focus { border-color: #2563eb; }
-        .send-btn { background: #2563eb; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.2s; }
-        .send-btn:hover { background: #1d4ed8; }
-        .send-btn:disabled { background: #9ca3af; cursor: not-allowed; }
+        .chat-container { position: fixed; bottom: 30px; right: 30px; width: 380px; background: white; border-radius: 20px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); display: flex; flex-direction: column; overflow: hidden; border: 1px solid #e2e8f0; z-index: 100; animation: bounceIn 0.4s ease-out; }
+        .chat-header { background: var(--primary); color: white; padding: 18px 20px; font-weight: 700; display: flex; align-items: center; gap: 12px; }
+        .chat-header .dot { width: 10px; height: 10px; background: #34d399; border-radius: 50%; box-shadow: 0 0 10px #34d399; }
+        .chat-box { height: 380px; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; background: #f8fafc; }
+        .msg { max-width: 85%; padding: 12px 16px; border-radius: 14px; font-size: 14px; line-height: 1.4; word-wrap: break-word; }
+        .msg.bot { background: white; align-self: flex-start; border: 1px solid #e2e8f0; border-bottom-left-radius: 4px; color: var(--dark); box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .msg.user { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 500; }
+        .chat-input-area { padding: 15px; background: white; border-top: 1px solid #e2e8f0; display: flex; gap: 10px; }
+        input[type="text"] { flex: 1; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; font-size: 14px; transition: border 0.2s; }
+        input[type="text"]:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+        .send-btn { background: var(--primary); color: white; border: none; padding: 0 20px; border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 14px; transition: background 0.2s; }
+        .send-btn:hover { background: var(--primary-dark); }
+        .send-btn:disabled { background: #94a3b8; cursor: not-allowed; }
         
         /* Quick Reply Buttons */
         .btn-container { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; margin-top: 5px; }
-        .quick-reply { background: white; border: 1px solid #2563eb; color: #2563eb; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: 600; transition: 0.2s; }
-        .quick-reply:hover { background: #eff6ff; }
+        .quick-reply { background: white; border: 1px solid var(--primary); color: var(--primary); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+        .quick-reply:hover { background: #eff6ff; transform: scale(1.02); }
 
         /* Slide-Out Control Panel (Dev Mode) */
-        .backend-panel { position: fixed; top: 0; left: -550px; width: 500px; height: 100vh; background: #111827; color: white; z-index: 200; padding: 30px; box-sizing: border-box; overflow-y: auto; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 10px 0 30px rgba(0,0,0,0.5); }
+        .backend-panel { position: fixed; top: 0; left: -550px; width: 500px; height: 100vh; background: #0b0f19; color: white; z-index: 200; padding: 30px; box-sizing: border-box; overflow-y: auto; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 20px 0 50px rgba(0,0,0,0.5); border-right: 1px solid #1e293b; }
         .backend-panel.open { left: 0; }
-        .backend-panel h2 { margin-top: 0; border-bottom: 1px solid #374151; padding-bottom: 15px; color: #60a5fa; display: flex; align-items: center; justify-content: space-between; }
-        .close-btn { background: transparent; color: #9ca3af; border: none; font-size: 24px; cursor: pointer; }
+        .backend-panel h2 { margin-top: 0; border-bottom: 1px solid #1e293b; padding-bottom: 15px; color: #60a5fa; display: flex; align-items: center; justify-content: space-between; font-size: 18px; }
+        .close-btn { background: transparent; color: #94a3b8; border: none; font-size: 24px; cursor: pointer; }
         .close-btn:hover { color: white; }
-        .iframe-container { margin-bottom: 25px; background: white; border-radius: 8px; overflow: hidden; height: 320px; }
+        .iframe-container { margin-bottom: 25px; background: white; border-radius: 12px; overflow: hidden; height: 300px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         .iframe-container iframe { width: 100%; height: 100%; border: none; }
-        .panel-label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #9ca3af; margin-bottom: 8px; display: block; font-weight: 600; }
+        .panel-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #94a3b8; margin-bottom: 8px; display: block; font-weight: 700; }
     </style>
 </head>
 <body>
 
-    <!-- Slide-Out Backend Control Room -->
+    <!-- Slide-Out Backend Control Room (Dev Mode) -->
     <div class="backend-panel" id="backendPanel">
         <h2>
-            <span>⚙️ System Backend</span>
+            <span>⚙️ Architecture Control Room</span>
             <button class="close-btn" onclick="toggleBackend()">×</button>
         </h2>
-        <p style="color: #9ca3af; font-size: 14px; margin-bottom: 25px; line-height: 1.5;">This control room displays real-time data synchronization between the web frontend, Google Calendar, and Google Sheets CRM.</p>
+        <p style="color: #94a3b8; font-size: 13px; margin-bottom: 25px; line-height: 1.6;">Live telemetry showing real-time event routing from the frontend UI into n8n Webhooks, Google Calendar, and CRM storage.</p>
         
-        <span class="panel-label">Live Dispatch Calendar</span>
+        <span class="panel-label">Live Google Calendar Sync</span>
         <div class="iframe-container">
             <iframe src="https://calendar.google.com/calendar/embed?src=sakuramisakikawaii%40gmail.com&ctz=Asia%2FManila"></iframe>
         </div>
 
-        <span class="panel-label">Live Database (Chat History)</span>
+        <span class="panel-label">Live Database (Google Sheets CRM)</span>
         <div class="iframe-container">
             <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2No54tpOdLhI3xUyJf0few-si1qAvoKpib1KIuZM7AlQiJElqZCGtOXKL1PQQqC1vtlB3IyA4wdmW/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
         </div>
     </div>
 
-    <!-- Main Landing Page -->
+    <!-- Navigation Header -->
     <header>
-        <div class="logo">🛠️ Apex Home Services</div>
-        <button class="dev-btn" onclick="toggleBackend()">⚙️ View Backend (Dev Mode)</button>
+        <div class="logo">🛠️ Apex <span>Home Services</span></div>
+        <div class="nav-right">
+            <button class="dev-btn" onclick="toggleBackend()">⚙️ View Backend (Dev Mode)</button>
+        </div>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero">
-        <h1>Fast, Professional AC & Plumbing Repair</h1>
-        <p>Don't sweat the heat or stress over leaks. Our certified technicians are on call 24/7. Chat with our AI Dispatcher below to receive instant pricing and lock in your appointment.</p>
-        
-        <div class="hero-features">
-            <div class="feature">
-                <strong>Instant Quotes</strong>
-                <span>Calculated directly from our service rates.</span>
+        <div class="hero-badge">⚡ 24/7 AI-Powered Dispatching</div>
+        <h1>Enterprise-Grade HVAC & Plumbing Solutions</h1>
+        <p>Experience lightning-fast diagnostics, transparent flat-rate pricing, and instant automated scheduling handled seamlessly by our virtual dispatcher.</p>
+    </section>
+
+    <!-- Trust Strip -->
+    <div class="trust-strip">
+        <div class="trust-item"><span>✓</span> Licensed & Insured Experts</div>
+        <div class="trust-item"><span>✓</span> 100% Satisfaction Guarantee</div>
+        <div class="trust-item"><span>✓</span> Zero Hidden Dispatch Fees</div>
+        <div class="trust-item"><span>✓</span> Real-Time Instant Booking</div>
+    </div>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="section-title">
+            <h2>Our Core Services</h2>
+            <p>Select a service or chat directly with our AI dispatcher for instant custom quotes.</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80&w=600')"></div>
+                <div class="service-content">
+                    <span class="service-tag">Maintenance</span>
+                    <h3>AC Tune-Up & Cleaning</h3>
+                    <p>Complete system multi-point inspection, coil cleaning, and performance optimization to lower your monthly electric bill.</p>
+                    <div class="service-footer">
+                        $89.00 <span>Book via Chat &rarr;</span>
+                    </div>
+                </div>
             </div>
-            <div class="feature">
-                <strong>Live Dispatch</strong>
-                <span>Syncs directly to technician calendars.</span>
+
+            <div class="service-card">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&q=80&w=600')"></div>
+                <div class="service-content">
+                    <span class="service-tag">Emergency Repair</span>
+                    <h3>AC Diagnostics & Repair</h3>
+                    <p>Rapid troubleshooting for blowing warm air, strange noises, or compressor failures. Dispatch fee waived if repair is booked.</p>
+                    <div class="service-footer">
+                        $49.00 Fee <span>Book via Chat &rarr;</span>
+                    </div>
+                </div>
             </div>
-            <div class="feature">
-                <strong>24/7 Response</strong>
-                <span>Automated dispatching with human oversight.</span>
+
+            <div class="service-card">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1542013936693-8942b260a92d?auto=format&fit=crop&q=80&w=600')"></div>
+                <div class="service-content">
+                    <span class="service-tag">Plumbing</span>
+                    <h3>Leaky Pipe & Plumbing Fix</h3>
+                    <p>Professional pipe replacement, joint sealing, and pressure testing performed by certified Master Plumbers.</p>
+                    <div class="service-footer">
+                        From $120.00 <span>Book via Chat &rarr;</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Chat Widget -->
+    <!-- Floating Chat Widget -->
     <div class="chat-container">
         <div class="chat-header">
             <div class="dot"></div> Apex AI Dispatcher
@@ -117,7 +199,7 @@
     </div>
 
     <script>
-        // Exact Cloudflare Webhook URL
+        // Cloudflare Webhook URL
         const N8N_WEBHOOK_URL = "https://magnet-sustainable-circular-hopes.trycloudflare.com/webhook/apex-web-chat"; 
         
         function toggleBackend() {
