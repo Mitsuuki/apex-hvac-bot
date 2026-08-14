@@ -232,8 +232,8 @@
 
     <script>
         // Cloudflare Webhook URL
-        const N8N_WEBHOOK_URL = "https://birds-withdrawal-unlike-development.trycloudflare.com/webhook/apex-web-chat"; 
-        
+        const N8N_WEBHOOK_URL = "https://helper-rubbing-refrain.ngrok-free.dev/webhook/apex-web-chat";
+
         function toggleBackend() {
             document.getElementById('backendPanel').classList.toggle('open');
         }
@@ -312,9 +312,12 @@
             sendBtn.innerText = "...";
 
             try {
-                const response = await fetch(N8N_WEBHOOK_URL, {
+                    const response = await fetch(N8N_WEBHOOK_URL, {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
+                    headers: { 
+                        "Content-Type": "application/json",
+                        "ngrok-skip-browser-warning": "true" 
+                    },
                     body: JSON.stringify({ sessionId: sessionId, message: text })
                 });
 
