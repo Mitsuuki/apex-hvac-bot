@@ -13,215 +13,265 @@
     <!-- 2. MOBILE ZOOM FIX -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, interactive-widget=resizes-content">
     <meta charset="UTF-8">
-    <title>Epic Event Rentals | Instant AI Booking</title>
+    <title>Apex Home Services | Premier HVAC & Plumbing Solutions</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
-        
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
         :root {
-            --primary: #8b5cf6; /* Vibrant Purple */
-            --secondary: #f59e0b; /* Bright Yellow/Orange */
-            --dark: #1e1b4b;
-            --light: #f5f3ff;
-            --white: #ffffff;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --dark: #0f172a;
+            --slate: #475569;
+            --light: #f8fafc;
+            --accent: #f59e0b;
         }
 
-        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background: var(--light); color: var(--dark); overflow-x: hidden; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; padding: 0; background: var(--light); color: var(--dark); overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* --- ENTRANCE ANIMATIONS TO MAKE IT FEEL ALIVE --- */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-in { opacity: 0; animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.3s; }
+        /* Navigation Header */
+        header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 18px 50px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 50; border-bottom: 1px solid #e2e8f0; }
         
-        @keyframes bounce-pulse {
-            0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); transform: translateY(0); }
-            50% { box-shadow: 0 0 0 15px rgba(245, 158, 11, 0); transform: translateY(-5px); }
-            100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); transform: translateY(0); }
-        }
-        
-        header { background: var(--white); padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 50; }
-        
-        /* --- NEW BACK BUTTON --- */
+        /* --- ADDED BACK BUTTON & WRAPPER --- */
         .header-left { display: flex; align-items: center; gap: 15px; }
-        .back-btn { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: var(--light); color: var(--primary); border: 1px solid var(--primary); text-decoration: none; transition: 0.3s; }
-        .back-btn:hover { background: var(--primary); color: var(--white); transform: translateX(-3px); }
-
-        .logo { font-size: 24px; font-weight: 800; color: var(--dark); letter-spacing: -0.5px; }
+        .back-btn { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #f1f5f9; color: var(--slate); border: 1px solid #cbd5e1; text-decoration: none; transition: 0.3s; }
+        .back-btn:hover { background: var(--primary); color: white; border-color: var(--primary); transform: translateX(-3px); }
+        
+        .logo { font-size: 20px; font-weight: 800; color: var(--dark); display: flex; align-items: center; gap: 10px; letter-spacing: -0.5px; }
         .logo span { color: var(--primary); }
-        
-        .dev-btn { background: var(--light); color: var(--primary); border: 2px solid var(--primary); padding: 10px 20px; border-radius: 30px; font-weight: 600; cursor: pointer; transition: 0.3s; }
-        .dev-btn:hover { background: var(--primary); color: var(--white); }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .dev-btn { background: #f1f5f9; color: var(--slate); border: 1px solid #cbd5e1; padding: 8px 16px; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 6px; }
+        .dev-btn:hover { background: #e2e8f0; color: var(--dark); }
 
-        .hero { background: linear-gradient(rgba(30, 27, 75, 0.8), rgba(30, 27, 75, 0.9)), url('https://images.unsplash.com/photo-1574259392081-dbe3c19cd15e?auto=format&fit=crop&q=80&w=1920') center/cover; color: var(--white); padding: 140px 20px; text-align: center; }
-        .hero h1 { font-size: 56px; font-weight: 800; margin: 0 0 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-        .hero p { font-size: 20px; max-width: 600px; margin: 0 auto; opacity: 0.9; }
+        /* Immersive Hero Section */
+        .hero { 
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.75)), url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=1920') center/cover no-repeat; 
+            color: white; 
+            padding: 120px 20px 100px 20px; 
+            text-align: center; 
+        }
+        .hero-badge { background: rgba(37, 99, 235, 0.2); border: 1px solid rgba(37, 99, 235, 0.4); color: #60a5fa; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 20px; }
+        .hero h1 { font-size: 52px; font-weight: 800; margin-bottom: 20px; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.15; letter-spacing: -1px; }
+        .hero p { font-size: 18px; opacity: 0.9; max-width: 600px; margin: 0 auto 40px auto; line-height: 1.6; color: #cbd5e1; }
 
-        .inventory-section { max-width: 1200px; margin: 80px auto; padding: 0 20px; }
-        .inventory-header { text-align: center; margin-bottom: 50px; }
-        .inventory-header h2 { font-size: 36px; color: var(--primary); margin-bottom: 10px; }
-        
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s; border: 2px solid transparent; }
-        .card:hover { transform: translateY(-10px); border-color: var(--secondary); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.15); }
-        .card-img { height: 220px; background-size: cover; background-position: center; transition: transform 0.5s; }
-        .card:hover .card-img { transform: scale(1.05); }
-        
-        .card-content { padding: 30px; position: relative; z-index: 2; background: var(--white); }
-        .price-tag { display: inline-block; background: var(--secondary); color: var(--dark); font-weight: 800; padding: 5px 15px; border-radius: 20px; font-size: 14px; margin-bottom: 15px; }
-        .card h3 { margin: 0 0 10px; font-size: 22px; }
-        .card p { color: #6b7280; font-size: 15px; margin-bottom: 20px; }
-        .book-btn { width: 100%; background: var(--primary); color: var(--white); border: none; padding: 12px; border-radius: 10px; font-weight: 600; font-size: 16px; cursor: pointer; transition: 0.2s; }
-        .book-btn:hover { background: #7c3aed; }
+        /* Trust Badges Bar */
+        .trust-strip { background: white; padding: 30px 50px; display: flex; justify-content: center; gap: 60px; border-bottom: 1px solid #e2e8f0; flex-wrap: wrap; }
+        .trust-item { display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 14px; color: var(--slate); }
+        .trust-item span { color: var(--primary); font-size: 20px; }
+
+        /* Services Grid Section */
+        .services-section { max-width: 1200px; margin: 80px auto; padding: 0 20px; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 36px; font-weight: 800; color: var(--dark); margin-bottom: 10px; letter-spacing: -0.5px; }
+        .section-title p { color: var(--slate); font-size: 16px; }
+
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .service-card { background: white; border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.08); }
+        .service-img { height: 200px; background-size: cover; background-position: center; }
+        .service-content { padding: 30px; }
+        .service-tag { color: var(--primary); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: block; }
+        .service-card h3 { font-size: 20px; font-weight: 700; margin: 0 0 10px 0; color: var(--dark); }
+        .service-card p { color: var(--slate); font-size: 14px; line-height: 1.5; margin-bottom: 20px; }
+        .service-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f1f5f9; padding-top: 15px; font-weight: 700; font-size: 16px; color: var(--dark); }
+        .service-footer span { color: var(--primary); font-size: 14px; cursor: pointer; }
 
         /* Chat Toggle Button */
-        .chat-toggle { position: fixed; bottom: 30px; right: 30px; width: 70px; height: 70px; border-radius: 50%; background: var(--secondary); color: var(--dark); border: none; font-size: 30px; cursor: pointer; z-index: 100; transition: transform 0.3s; display: flex; align-items: center; justify-content: center; animation: bounce-pulse 2.5s infinite; }
-        .chat-toggle:hover { transform: scale(1.1); animation: none; }
+        .chat-toggle { position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 28px; box-shadow: 0 10px 25px rgba(37,99,235,0.4); cursor: pointer; z-index: 100; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease; display: flex; align-items: center; justify-content: center; }
+        .chat-toggle:hover { transform: scale(1.05); background: var(--primary-dark); }
         .chat-toggle.hidden { transform: scale(0); opacity: 0; pointer-events: none; }
 
         /* Floating Chat Widget */
-        .chat-container { position: fixed; bottom: 30px; right: 30px; width: 380px; background: var(--white); border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); display: flex; flex-direction: column; overflow: hidden; border: 1px solid #e5e7eb; z-index: 101; transform: scale(0); transform-origin: bottom right; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease; opacity: 0; pointer-events: none; }
+        .chat-container { position: fixed; bottom: 30px; right: 30px; width: 380px; background: white; border-radius: 20px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); display: flex; flex-direction: column; overflow: hidden; border: 1px solid #e2e8f0; z-index: 101; transform: scale(0); transform-origin: bottom right; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease; opacity: 0; pointer-events: none; }
         .chat-container.open { transform: scale(1); opacity: 1; pointer-events: auto; }
-        .chat-header { background: var(--primary); color: var(--white); padding: 20px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
-        .close-chat-btn { background: none; border: none; color: var(--white); font-size: 24px; cursor: pointer; opacity: 0.8; transition: transform 0.3s; }
-        .close-chat-btn:hover { opacity: 1; transform: rotate(90deg); }
+        .chat-header { background: var(--primary); color: white; padding: 18px 20px; font-weight: 700; display: flex; align-items: center; justify-content: space-between; }
+        .chat-header-left { display: flex; align-items: center; gap: 12px; }
+        .chat-header .dot { width: 10px; height: 10px; background: #34d399; border-radius: 50%; box-shadow: 0 0 10px #34d399; }
+        .close-chat-btn { background: none; border: none; color: white; font-size: 24px; cursor: pointer; line-height: 1; padding: 0; opacity: 0.8; transition: 0.2s; }
+        .close-chat-btn:hover { opacity: 1; }
+        .chat-box { height: 380px; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; background: #f8fafc; }
+        .msg { max-width: 85%; padding: 12px 16px; border-radius: 14px; font-size: 14px; line-height: 1.4; word-wrap: break-word; }
+        .msg.bot { background: white; align-self: flex-start; border: 1px solid #e2e8f0; border-bottom-left-radius: 4px; color: var(--dark); box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .msg.user { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 500; }
         
-        .chat-box { height: 400px; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; background: #faf5ff; scroll-behavior: smooth;}
-        .msg { max-width: 85%; padding: 12px 16px; border-radius: 18px; font-size: 14px; line-height: 1.4; word-wrap: break-word; animation: fadeInUp 0.3s ease;}
-        .msg.bot { background: var(--white); align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #ede9fe; }
-        .msg.user { background: var(--primary); color: var(--white); align-self: flex-end; border-bottom-right-radius: 4px; }
-        
-        /* --- TYPING INDICATOR --- */
-        .typing-indicator { display: none; align-items: center; gap: 4px; padding: 12px 16px; width: fit-content; background: var(--white); align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #ede9fe; border-radius: 18px;}
-        .typing-indicator span { display: block; width: 6px; height: 6px; background-color: #94a3b8; border-radius: 50%; animation: typing 1.4s infinite ease-in-out both; }
+        /* --- ADDED TYPING INDICATOR CSS --- */
+        .typing-indicator { display: none; align-items: center; gap: 4px; padding: 12px 16px; width: fit-content; background: white; align-self: flex-start; border: 1px solid #e2e8f0; border-bottom-left-radius: 4px; border-radius: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);}
+        .typing-indicator span { display: block; width: 6px; height: 6px; background-color: var(--slate); border-radius: 50%; animation: typing 1.4s infinite ease-in-out both; }
         .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
         .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
         @keyframes typing { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
 
-        /* --- AUTO-EXPANDING TEXTAREA --- */
-        .chat-input-area { padding: 15px; background: var(--white); border-top: 1px solid #ede9fe; display: flex; gap: 10px; align-items: flex-end; }
-        textarea#user-input { flex: 1; padding: 12px; border: 1px solid #e5e7eb; border-radius: 12px; outline: none; font-family: 'Poppins', sans-serif; resize: none; max-height: 120px; min-height: 20px; box-sizing: border-box; overflow-y: hidden; line-height: 1.5; transition: border 0.3s;}
-        textarea#user-input:focus { border-color: var(--primary); }
-        .send-btn { background: var(--secondary); color: var(--dark); border: none; padding: 0 20px; border-radius: 12px; cursor: pointer; font-weight: 600; font-family: 'Poppins', sans-serif; display: flex; align-items: center; justify-content: center; height: 44px; margin-bottom: 2px;}
+        /* --- UPDATED TEXTAREA CSS --- */
+        .chat-input-area { padding: 15px; background: white; border-top: 1px solid #e2e8f0; display: flex; gap: 10px; align-items: flex-end; }
+        textarea#user-input { flex: 1; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; font-size: 14px; transition: border 0.2s; font-family: 'Plus Jakarta Sans', sans-serif; resize: none; max-height: 120px; min-height: 20px; box-sizing: border-box; overflow-y: hidden; line-height: 1.5; }
+        textarea#user-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+        .send-btn { background: var(--primary); color: white; border: none; padding: 0 20px; border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 14px; transition: background 0.2s; height: 44px; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;}
+        .send-btn:hover { background: var(--primary-dark); }
+        .send-btn:disabled { background: #94a3b8; cursor: not-allowed; }
 
-        /* Backend Panel */
-        .backend-panel { position: fixed; top: 0; left: -650px; width: 600px; height: 100vh; background: var(--white); z-index: 200; padding: 40px; box-sizing: border-box; overflow-y: auto; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 20px 0 50px rgba(0,0,0,0.2); }
+        /* Quick Reply Buttons */
+        .btn-container { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; margin-top: 5px; }
+        .quick-reply { background: white; border: 1px solid var(--primary); color: var(--primary); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+        .quick-reply:hover { background: #eff6ff; transform: scale(1.02); }
+
+        /* Slide-Out Control Panel (Dev Mode) */
+        .backend-panel { position: fixed; top: 0; left: -650px; width: 600px; height: 100vh; background: #0b0f19; color: white; z-index: 200; padding: 30px; box-sizing: border-box; overflow-y: auto; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 20px 0 50px rgba(0,0,0,0.5); border-right: 1px solid #1e293b; }
         .backend-panel.open { left: 0; }
-        .panel-close-btn { position: absolute; top: 30px; right: 30px; background: none; border: none; font-size: 28px; cursor: pointer; color: var(--dark); transition: transform 0.3s;}
-        .panel-close-btn:hover { transform: rotate(90deg); }
-        .iframe-container { margin-bottom: 30px; border-radius: 12px; overflow: hidden; height: 350px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border: 1px solid #e5e7eb; }
+        .backend-panel h2 { margin-top: 0; border-bottom: 1px solid #1e293b; padding-bottom: 15px; color: #60a5fa; display: flex; align-items: center; justify-content: space-between; font-size: 18px; }
+        .panel-close-btn { background: transparent; color: #94a3b8; border: none; font-size: 24px; cursor: pointer; }
+        .panel-close-btn:hover { color: white; }
+        .iframe-container { margin-bottom: 25px; background: white; border-radius: 12px; overflow: hidden; height: 320px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         .iframe-container iframe { width: 100%; height: 100%; border: none; }
-        .panel-label { font-size: 12px; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-bottom: 10px; display: block; letter-spacing: 1px; }
-        
-        .stripe-alert { background: #ecfdf5; border: 1px solid #10b981; color: #047857; padding: 15px; border-radius: 12px; display: none; font-size: 13px; font-weight: 600; margin-bottom: 20px; animation: fadeInUp 0.4s ease; }
+        .panel-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #94a3b8; margin-bottom: 8px; display: block; font-weight: 700; }
 
+        /* --- MOBILE RESPONSIVENESS --- */
         @media (max-width: 768px) {
-            header { padding: 15px 20px; }
-            .hero { padding: 120px 20px 80px; }
-            .hero h1 { font-size: 40px; }
+            header { padding: 15px 20px; flex-direction: column; gap: 15px; }
+            .hero { padding: 80px 20px 60px; }
+            .hero h1 { font-size: 36px; }
+            .trust-strip { flex-direction: column; gap: 20px; align-items: center; text-align: center; padding: 20px; }
+            .section-title h2 { font-size: 28px; }
+            
+            /* Responsive Dev Panel */
             .backend-panel { width: 100%; left: -100%; padding: 20px; }
-            .chat-container { width: calc(100% - 40px); right: 20px; bottom: 20px; }
-            .chat-toggle { bottom: 20px; right: 20px; }
+            
+            /* Responsive Chat Widget */
+            .chat-toggle { bottom: 20px; right: 20px; width: 55px; height: 55px; font-size: 24px; }
+            .chat-container { 
+                width: calc(100% - 40px); 
+                right: 20px; 
+                bottom: 20px; 
+            }
+            .chat-box { height: 350px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Backend Dev Panel -->
+    <!-- Slide-Out Backend Control Room (Dev Mode) -->
     <div class="backend-panel" id="backendPanel">
-        <button class="panel-close-btn" onclick="toggleBackend()">×</button>
-        <h2 style="margin-top:0; color: var(--dark);">⚙️ Inventory Control Room</h2>
-        <p style="color: #6b7280; font-size: 14px; margin-bottom: 30px;">The AI reads this live Google Calendar to prevent double-bookings, then issues Stripe links automatically.</p>
+        <h2>
+            <span>⚙️ Architecture Control Room</span>
+            <button class="panel-close-btn" onclick="toggleBackend()">×</button>
+        </h2>
+        <p style="color: #94a3b8; font-size: 13px; margin-bottom: 25px; line-height: 1.6;">Live telemetry showing real-time event routing from the frontend UI into n8n Webhooks, Google Calendar, and CRM storage.</p>
         
-        <div class="stripe-alert" id="stripeAlert">
-            💳 STRIPE CHECKOUT INITIATED: The AI just deployed a live payment link for the customer.
+        <span class="panel-label">Live Google Calendar Sync</span>
+        <div class="iframe-container">
+            <iframe src="https://calendar.google.com/calendar/embed?src=sakuramisakikawaii%40gmail.com&ctz=Asia%2FManila" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
         </div>
 
-        <span class="panel-label">Live Inventory Calendar</span>
+        <span class="panel-label">Live Database (Google Sheets CRM)</span>
         <div class="iframe-container">
-            <iframe src="https://calendar.google.com/calendar/embed?src=sakuramisakikawaii%40gmail.com&ctz=Asia%2FManila&mode=WEEK"></iframe>
-        </div>
-
-        <span class="panel-label">Lead Database</span>
-        <div class="iframe-container">
-            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2No54tpOdLhI3xUyJf0few-si1qAvoKpib1KIuZM7AlQiJElqZCGtOXKL1PQQqC1vtlB3IyA4wdmW/pubhtml?gid=816046492&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2No54tpOdLhI3xUyJf0few-si1qAvoKpib1KIuZM7AlQiJElqZCGtOXKL1PQQqC1vtlB3IyA4wdmW/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
         </div>
     </div>
 
-    <!-- Header -->
+    <!-- Navigation Header -->
     <header>
+        <!-- BACK BUTTON ADDED HERE -->
         <div class="header-left">
             <a href="https://mitsuuki.github.io/demo-hub/" class="back-btn" title="Back to Hub">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
             </a>
-            <div class="logo">Epic <span>Events</span></div>
+            <div class="logo">🛠️ Apex <span>Home Services</span></div>
         </div>
-        <button class="dev-btn" onclick="toggleBackend()">View Backend (Dev Mode)</button>
+        <div class="nav-right">
+            <button class="dev-btn" onclick="toggleBackend()">⚙️ View Backend (Dev Mode)</button>
+        </div>
     </header>
 
-    <!-- Hero -->
+    <!-- Hero Section -->
     <section class="hero">
-        <h1 class="fade-in">Turn Your Backyard Into A Bash.</h1>
-        <p class="fade-in delay-1">Chat with our AI to check live calendar availability and book your bounce house instantly.</p>
+        <div class="hero-badge">⚡ 24/7 AI-Powered Dispatching</div>
+        <h1>Enterprise-Grade HVAC & Plumbing Solutions</h1>
+        <p>Experience lightning-fast diagnostics, transparent flat-rate pricing, and instant automated scheduling handled seamlessly by our virtual dispatcher.</p>
     </section>
 
-    <!-- Inventory -->
-    <section class="inventory-section">
-        <div class="inventory-header fade-in delay-2">
-            <h2>Current Inventory</h2>
-            <p style="color: #6b7280;">Inventory syncs directly with our Google Calendar.</p>
+    <!-- Trust Strip -->
+    <div class="trust-strip">
+        <div class="trust-item"><span>✓</span> Licensed & Insured Experts</div>
+        <div class="trust-item"><span>✓</span> 100% Satisfaction Guarantee</div>
+        <div class="trust-item"><span>✓</span> Zero Hidden Dispatch Fees</div>
+        <div class="trust-item"><span>✓</span> Real-Time Instant Booking</div>
+    </div>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="section-title">
+            <h2>Our Core Services</h2>
+            <p>Select a service or chat directly with our AI dispatcher for instant custom quotes.</p>
         </div>
-        <div class="grid">
-            <div class="card fade-in delay-1">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?auto=format&fit=crop&q=80&w=600');"></div>
-                <div class="card-content">
-                    <span class="price-tag">$150 / day</span>
-                    <h3>Classic Castle</h3>
-                    <p>Perfect for birthdays and block parties. Standard 15x15 footprint.</p>
-                    <button class="book-btn" onclick="openChatWithPrefill('I want to book the Classic Castle')">Check Availability &rarr;</button>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80&w=600')"></div>
+                <div class="service-content">
+                    <span class="service-tag">Maintenance</span>
+                    <h3>AC Tune-Up & Cleaning</h3>
+                    <p>Complete system multi-point inspection, coil cleaning, and performance optimization to lower your monthly electric bill.</p>
+                    <div class="service-footer">
+                        $89.00 <span onclick="openChatWithPrefill('I need an AC Tune-Up')">Book via Chat &rarr;</span>
+                    </div>
                 </div>
             </div>
-            <div class="card fade-in delay-2">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1563823250269-826d15a5bb1d?auto=format&fit=crop&q=80&w=600');"></div>
-                <div class="card-content">
-                    <span class="price-tag">$250 / day</span>
-                    <h3>Tropical Slide</h3>
-                    <p>Beat the heat with this 18-foot inflatable water slide.</p>
-                    <button class="book-btn" onclick="openChatWithPrefill('I want to book the Tropical Slide')">Check Availability &rarr;</button>
+
+            <div class="service-card">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&q=80&w=600')"></div>
+                <div class="service-content">
+                    <span class="service-tag">Emergency Repair</span>
+                    <h3>AC Diagnostics & Repair</h3>
+                    <p>Rapid troubleshooting for blowing warm air, strange noises, or compressor failures. Dispatch fee waived if repair is booked.</p>
+                    <div class="service-footer">
+                        $49.00 Fee <span onclick="openChatWithPrefill('I need an AC Repair')">Book via Chat &rarr;</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1542013936693-8942b260a92d?auto=format&fit=crop&q=80&w=600')"></div>
+                <div class="service-content">
+                    <span class="service-tag">Plumbing</span>
+                    <h3>Leaky Pipe & Plumbing Fix</h3>
+                    <p>Professional pipe replacement, joint sealing, and pressure testing performed by certified Master Plumbers.</p>
+                    <div class="service-footer">
+                        From $120.00 <span onclick="openChatWithPrefill('I need a Plumbing Fix')">Book via Chat &rarr;</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Chat Widget -->
-    <button class="chat-toggle" id="chatToggleBtn" onclick="toggleChat()">🎈</button>
+    <!-- Chat Toggle Button -->
+    <button class="chat-toggle" id="chatToggleBtn" onclick="toggleChat()">💬</button>
 
+    <!-- Floating Chat Widget -->
     <div class="chat-container" id="chatContainer">
         <div class="chat-header">
-            Epic Events AI Booking
+            <div class="chat-header-left">
+                <div class="dot"></div> Apex AI Dispatcher
+            </div>
             <button class="close-chat-btn" onclick="toggleChat()">×</button>
         </div>
         <div class="chat-box" id="chat-box">
-            <div class="msg bot">Hi! Ready to party? Let me know what you want to rent and for what date, and I'll check our live inventory!</div>
+            <div class="msg bot">Hi there! Need an AC repair or plumbing fix? Let me know how I can help.</div>
             
-            <!-- Typing Indicator -->
+            <!-- TYPING INDICATOR ADDED -->
             <div id="typing-indicator" class="typing-indicator">
                 <span></span><span></span><span></span>
             </div>
         </div>
         <div class="chat-input-area">
-            <textarea id="user-input" rows="1" placeholder="Type here..." onkeydown="handleKeyPress(event)"></textarea>
+            <textarea id="user-input" rows="1" placeholder="Type your message..." onkeydown="handleKeyPress(event)"></textarea>
             <button class="send-btn" id="send-btn" onclick="sendMessage()">Send</button>
         </div>
     </div>
 
     <script>
-        // --- BASE NGROK URL ---
-        const BASE_WEBHOOK_URL = "https://helper-rubbing-refrain.ngrok-free.dev/webhook/party-rental-chat";
-
-        let isSending = false; // DOUBLE-ENTRY LOCK
+        // --- CONSOLIDATED & UPGRADED NGROK URL ---
+        const BASE_WEBHOOK_URL = "https://helper-rubbing-refrain.ngrok-free.dev/webhook/apex-web-chat";
+        
+        // --- ADDED DOUBLE-ENTRY LOCK ---
+        let isSending = false;
 
         function toggleBackend() {
             document.getElementById('backendPanel').classList.toggle('open');
@@ -237,7 +287,7 @@
             }
         }
 
-        // Open chat automatically after 2 seconds
+        // Open chat automatically after 1.5 seconds so the user knows it's there
         setTimeout(() => {
             const chat = document.getElementById('chatContainer');
             const toggleBtn = document.getElementById('chatToggleBtn');
@@ -245,7 +295,7 @@
                 chat.classList.add('open');
                 toggleBtn.classList.add('hidden');
             }
-        }, 2000);
+        }, 1500);
 
         function openChatWithPrefill(text) {
             const chat = document.getElementById('chatContainer');
@@ -255,14 +305,14 @@
             const input = document.getElementById('user-input');
             input.value = text;
             
-            // Auto-resize textarea
+            // Auto-resize trigger for prefill
             input.style.height = "auto";
             input.style.height = (input.scrollHeight) + "px";
             
             input.focus();
         }
 
-        // Auto-expanding textarea logic
+        // --- AUTO EXPANDING TEXTAREA LOGIC ---
         const userInput = document.getElementById("user-input");
         userInput.addEventListener("input", function() {
             this.style.height = "auto";
@@ -277,14 +327,29 @@
         function appendMessage(text, sender) {
             const msgDiv = document.createElement("div");
             msgDiv.className = `msg ${sender}`;
-            
-            // Transform Stripe links into a sleek popup window instead of a new tab
-            if(text.includes('stripe.com')) {
-                text = text.replace(/(https:\/\/(buy|book)\.stripe\.com\/[^\s]+)/g, '<a href="#" onclick="window.open(\'$1\', \'StripeCheckout\', \'width=450,height=750,top=100,left=100,resizable=yes,scrollbars=yes\'); return false;" style="color:var(--primary); font-weight:bold; text-decoration:underline; cursor:pointer;">Click Here to Pay via Stripe &rarr;</a>');
-            }
-            
-            msgDiv.innerHTML = text; 
+            msgDiv.innerText = text;
             chatBox.insertBefore(msgDiv, typingIndicator);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function appendButtons(buttonsArray) {
+            if (!buttonsArray || buttonsArray.length === 0) return;
+            const container = document.createElement("div");
+            container.className = "btn-container";
+
+            buttonsArray.forEach(btnText => {
+                const btn = document.createElement("button");
+                btn.className = "quick-reply";
+                btn.innerText = btnText;
+                btn.onclick = () => {
+                    container.style.display = "none";
+                    userInput.value = "I want to book " + btnText;
+                    userInput.style.height = "auto";
+                    sendMessage();
+                };
+                container.appendChild(btn);
+            });
+            chatBox.insertBefore(container, typingIndicator);
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
@@ -310,11 +375,12 @@
             userInput.style.height = "auto";
             userInput.disabled = true;
             sendBtn.disabled = true;
+            sendBtn.innerText = "...";
 
             showTyping();
 
             try {
-                // Dynamically add cache-busting timestamp on every request
+                // FIXED THE BROKEN FETCH SYNTAX FROM PREVIOUS CODE
                 const liveUrl = BASE_WEBHOOK_URL + "?t=" + Date.now();
                 
                 const response = await fetch(liveUrl, {
@@ -327,16 +393,11 @@
                 });
 
                 const data = await response.json();
+                
                 hideTyping();
                 appendMessage(data.text || "Sorry, I encountered an error.", "bot");
-
-                // If AI deployed the Stripe link, show the green alert in the Dev Panel
-                if(data.ready_to_pay === true || data.ready_to_pay === "true") {
-                    document.getElementById("stripeAlert").style.display = "block";
-                    const panel = document.getElementById("backendPanel");
-                    if (!panel.classList.contains("open")) {
-                        panel.classList.add("open");
-                    }
+                if (data.buttons) {
+                    appendButtons(data.buttons);
                 }
 
             } catch (error) {
@@ -346,14 +407,15 @@
             } finally {
                 userInput.disabled = false;
                 sendBtn.disabled = false;
+                sendBtn.innerText = "Send";
                 userInput.focus();
                 
-                isSending = false; 
+                isSending = false;
             }
         }
 
         function handleKeyPress(e) {
-            // Allows Shift+Enter for new line, regular Enter sends message
+            // Support Shift+Enter for new lines, Enter for sending
             if (e.key === "Enter" && !e.shiftKey) {
                 e.preventDefault();
                 sendMessage();
