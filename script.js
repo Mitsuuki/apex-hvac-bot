@@ -6,19 +6,28 @@ let isSending = false;
 // --- EMAIL PING LOGIC ---
 function checkEmailInput() {
     const emailInput = document.getElementById("demo-alert-dest");
-    const ping = document.getElementById("dev-ping");
+    const pingNav = document.getElementById("dev-ping");
+    const pingInput = document.getElementById("input-ping");
     
     if(emailInput.value.trim() !== "") {
-        ping.style.display = "none";
+        pingNav.style.display = "none";
+        pingInput.style.display = "none";
         emailInput.classList.add("filled");
     } else {
-        ping.style.display = "inline-block";
+        pingNav.style.display = "inline-block";
+        pingInput.style.display = "inline-block";
         emailInput.classList.remove("filled");
     }
 }
 
 function toggleBackend() { 
     document.getElementById('backendPanel').classList.toggle('open'); 
+    
+    // Auto-focus the email box when they open it, if it's empty
+    const emailInput = document.getElementById("demo-alert-dest");
+    if(emailInput.value.trim() === "") {
+        setTimeout(() => emailInput.focus(), 400);
+    }
 }
 
 function refreshFrame(id) {
@@ -41,7 +50,6 @@ function toggleChat() {
     if (chat.classList.contains('open')) document.getElementById('user-input').focus();
 }
 
-// Only auto-open chat if screen is larger than a phone
 setTimeout(() => {
     if (window.innerWidth > 768) {
         const chat = document.getElementById('chatContainer');
@@ -108,6 +116,11 @@ function appendButtons(buttonsArray) {
 function showTyping() { typingIndicator.style.display = "flex"; chatBox.scrollTop = chatBox.scrollHeight; }
 function hideTyping() { typingIndicator.style.display = "none"; }
 
+function getTimestamp() {
+    const now = new Date();
+    return now.toLocaleTimeString('en-US', { hour12: false });
+}
+
 async function sendMessage() {
     if (isSending) return;
     const text = userInput.value.trim();
@@ -127,8 +140,8 @@ async function sendMessage() {
     try {
         const demoDest = document.getElementById("demo-alert-dest") ? document.getElementById("demo-alert-dest").value.trim() : "";
 
-        // COMMAND LINE LOGIC
-        term.innerHTML += `<br>> TRANSMITTING PAYLOAD TO ENGINE... <span style="color:#fff">[OK]</span>`;
+        // PROFESSIONAL TERMINAL LOGIC
+        term.innerHTML += `<br><span style="color: #64748b">[${getTimestamp()}]</span> > POST /api/v1/engine/transmit ... <span style="color:#e2e8f0">[PENDING]</span>`;
         term.scrollTop = term.scrollHeight;
 
         const liveUrl = N8N_WEBHOOK_URL + "?t=" + Date.now();
@@ -147,26 +160,28 @@ async function sendMessage() {
         hideTyping();
         appendMessage(data.text || "Sorry, I encountered an error.", "bot");
         if (data.buttons) { appendButtons(data.buttons); }
+        
+        term.innerHTML += `<br><span style="color: #64748b">[${getTimestamp()}]</span> > RESPONSE RECEIVED ... <span style="color:#10b981">[200 OK]</span>`;
 
         if (data.text.includes("scheduled") || data.text.includes("saved") || text.toLowerCase().includes("book") || text.toLowerCase().includes("pm") || text.toLowerCase().includes("am")) {
             
             setTimeout(() => {
-                term.innerHTML += `<br>> PUSHING LEAD TO DATABASE... <span style="color:#fff">[SUCCESS]</span>`;
+                term.innerHTML += `<br><span style="color: #64748b">[${getTimestamp()}]</span> > SQL_INSERT into public.leads ... <span style="color:#10b981">[SUCCESS]</span>`;
                 term.scrollTop = term.scrollHeight;
             }, 800);
 
             setTimeout(() => {
-                term.innerHTML += `<br>> SYNCING TO GOOGLE CALENDAR... <span style="color:#fff">[SUCCESS]</span>`;
+                term.innerHTML += `<br><span style="color: #64748b">[${getTimestamp()}]</span> > POST https://www.googleapis.com/calendar/v3/calendars ... <span style="color:#10b981">[SUCCESS]</span>`;
                 term.scrollTop = term.scrollHeight;
             }, 1800);
 
             setTimeout(() => {
                 if (demoDest) {
-                    term.innerHTML += `<br>> DISPATCH_ALERT ROUTED TO: <b>${demoDest}</b>... <span style="color:#fff">[SENT]</span>`;
+                    term.innerHTML += `<br><span style="color: #64748b">[${getTimestamp()}]</span> > DISPATCH_MAIL_SMTP: Routing to <b>${demoDest}</b> ... <span style="color:#3b82f6">[QUEUED & SENT]</span>`;
                     
                     try {
                         let ding = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
-                        ding.volume = 0.6;
+                        ding.volume = 0.5;
                         ding.play();
                     } catch(e) {}
                     
@@ -175,7 +190,7 @@ async function sendMessage() {
                         panel.classList.add("open");
                     }
                 } else {
-                    term.innerHTML += `<br>> <span style="color:#ef4444">WARN: NO TARGET EMAIL PROVIDED. SKIPPING DISPATCH.</span>`;
+                    term.innerHTML += `<br><span style="color: #64748b">[${getTimestamp()}]</span> > <span style="color:#f59e0b">WARN: alert_destination is null. Skipping SMTP dispatch.</span>`;
                 }
                 term.scrollTop = term.scrollHeight;
             }, 3000);
@@ -185,7 +200,7 @@ async function sendMessage() {
         hideTyping();
         console.error("Transmission Error:", error);
         appendMessage("Network error or outdated browser detected. Please check your connection or call us directly.", "bot");
-        term.innerHTML += `<br>> <span style="color:#ef4444">FATAL: WEBHOOK TRANSMISSION FAILED.</span>`;
+        term.innerHTML += `<br><span style="color: #64748b">[${getTimestamp()}]</span> > <span style="color:#ef4444">FATAL_ERR: Webhook connection timed out.</span>`;
     } finally {
         userInput.disabled = false;
         sendBtn.disabled = false;
