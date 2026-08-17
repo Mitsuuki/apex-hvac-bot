@@ -282,12 +282,15 @@
             if (chat.classList.contains('open')) document.getElementById('user-input').focus();
         }
 
+        // Only auto-open chat if screen is larger than a phone
         setTimeout(() => {
-            const chat = document.getElementById('chatContainer');
-            const toggleBtn = document.getElementById('chatToggleBtn');
-            if (!chat.classList.contains('open')) {
-                chat.classList.add('open');
-                toggleBtn.classList.add('hidden');
+            if (window.innerWidth > 768) {
+                const chat = document.getElementById('chatContainer');
+                const toggleBtn = document.getElementById('chatToggleBtn');
+                if (!chat.classList.contains('open')) {
+                    chat.classList.add('open');
+                    toggleBtn.classList.add('hidden');
+                }
             }
         }, 2000);
 
