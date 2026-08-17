@@ -266,28 +266,22 @@
         </div>
     </div>
 
-    <script>
-        // --- CONSOLIDATED & UPGRADED NGROK URL ---
-        const BASE_WEBHOOK_URL = "https://helper-rubbing-refrain.ngrok-free.dev/webhook/apex-web-chat";
+<script>
+        // --- 100% BULLETPROOF CLOUDFLARE URL ---
+        const N8N_WEBHOOK_URL = "https://ships-generators-relative-wma.trycloudflare.com/webhook/apex-web-chat";
         
-        // --- ADDED DOUBLE-ENTRY LOCK ---
         let isSending = false;
 
-        function toggleBackend() {
-            document.getElementById('backendPanel').classList.toggle('open');
-        }
+        function toggleBackend() { document.getElementById('backendPanel').classList.toggle('open'); }
 
         function toggleChat() {
             const chat = document.getElementById('chatContainer');
             const toggleBtn = document.getElementById('chatToggleBtn');
             chat.classList.toggle('open');
             toggleBtn.classList.toggle('hidden');
-            if (chat.classList.contains('open')) {
-                document.getElementById('user-input').focus();
-            }
+            if (chat.classList.contains('open')) document.getElementById('user-input').focus();
         }
 
-        // Open chat automatically after 1.5 seconds so the user knows it's there
         setTimeout(() => {
             const chat = document.getElementById('chatContainer');
             const toggleBtn = document.getElementById('chatToggleBtn');
@@ -295,7 +289,7 @@
                 chat.classList.add('open');
                 toggleBtn.classList.add('hidden');
             }
-        }, 1500);
+        }, 2000);
 
         function openChatWithPrefill(text) {
             const chat = document.getElementById('chatContainer');
@@ -304,15 +298,11 @@
             toggleBtn.classList.add('hidden');
             const input = document.getElementById('user-input');
             input.value = text;
-            
-            // Auto-resize trigger for prefill
             input.style.height = "auto";
             input.style.height = (input.scrollHeight) + "px";
-            
             input.focus();
         }
 
-        // --- AUTO EXPANDING TEXTAREA LOGIC ---
         const userInput = document.getElementById("user-input");
         userInput.addEventListener("input", function() {
             this.style.height = "auto";
@@ -327,7 +317,7 @@
         function appendMessage(text, sender) {
             const msgDiv = document.createElement("div");
             msgDiv.className = `msg ${sender}`;
-            msgDiv.innerText = text;
+            msgDiv.innerHTML = text; 
             chatBox.insertBefore(msgDiv, typingIndicator);
             chatBox.scrollTop = chatBox.scrollHeight;
         }
@@ -352,43 +342,31 @@
             chatBox.insertBefore(container, typingIndicator);
             chatBox.scrollTop = chatBox.scrollHeight;
         }
-
-        function showTyping() {
-            typingIndicator.style.display = "flex";
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-
-        function hideTyping() {
-            typingIndicator.style.display = "none";
-        }
+        
+        function showTyping() { typingIndicator.style.display = "flex"; chatBox.scrollTop = chatBox.scrollHeight; }
+        function hideTyping() { typingIndicator.style.display = "none"; }
 
         async function sendMessage() {
             if (isSending) return;
-
             const text = userInput.value.trim();
             if (!text) return;
 
             isSending = true;
-
             appendMessage(text, "user");
             userInput.value = "";
             userInput.style.height = "auto";
             userInput.disabled = true;
             sendBtn.disabled = true;
-            sendBtn.innerText = "...";
-
+            
             showTyping();
 
             try {
-                // FIXED THE BROKEN FETCH SYNTAX FROM PREVIOUS CODE
-                const liveUrl = BASE_WEBHOOK_URL + "?t=" + Date.now();
+                // CLEAN URL FOR CLOUDFLARE
+                const liveUrl = N8N_WEBHOOK_URL + "?t=" + Date.now();
                 
                 const response = await fetch(liveUrl, {
                     method: "POST",
-                    headers: { 
-                        "Content-Type": "application/json",
-                        "ngrok-skip-browser-warning": "true" 
-                    },
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ sessionId: sessionId, message: text })
                 });
 
@@ -396,26 +374,45 @@
                 
                 hideTyping();
                 appendMessage(data.text || "Sorry, I encountered an error.", "bot");
-                if (data.buttons) {
-                    appendButtons(data.buttons);
+                if (data.buttons) { appendButtons(data.buttons); }
+
+                // --- LIVE EMAIL TERMINAL SIMULATION LOGIC ---
+                if (data.trigger_follow_up === true || data.trigger_follow_up === "true") {
+                    const smsTerminal = document.getElementById("smsTerminal");
+                    const panel = document.getElementById("backendPanel");
+                    
+                    if (!panel.classList.contains("open")) panel.classList.add("open");
+
+                    smsTerminal.innerHTML += `<br><span style="color: #f59e0b;">> [LEAD ACQUIRED] Auto-Follow-up Sequence queued for ${data.lead_name || 'Client'} (${data.lead_email || 'Email'}). Dispatching in 60s...</span><br>`;
+                    smsTerminal.scrollTop = smsTerminal.scrollHeight;
+
+                    setTimeout(() => {
+                        const time = new Date().toLocaleTimeString();
+                        const smsMsg = `Hi ${data.lead_name || 'there'}, it's Apex Home Services. Checking in on your booking! Did you still need an estimate for the ${data.car_issue || 'repair'}? Let us know!`;
+                        
+                        smsTerminal.innerHTML += `<br><span style="color: #34d399;">[${time}] > EMAIL DISPATCHED SUCCESSFULLY</span><br>`;
+                        smsTerminal.innerHTML += `<span style="color: white;">TO: ${data.lead_email || 'Unknown Email'}</span><br>`;
+                        smsTerminal.innerHTML += `<span style="color: #94a3b8;">PAYLOAD: "${smsMsg}"</span><br>`;
+                        smsTerminal.scrollTop = smsTerminal.scrollHeight;
+                    }, 60000); 
                 }
 
             } catch (error) {
                 hideTyping();
                 console.error("Transmission Error:", error);
                 appendMessage("Network error or outdated browser detected. Please check your connection or call us directly.", "bot");
+                
+                const errorTrace = `[DIAGNOSTIC TRACE]<br>Error: ${error.name}<br>Message: ${error.message}<br>Check n8n CORS settings or Cloudflare connection!`;
+                appendMessage(`<div style="font-size: 11px; color: #e11d48; margin-top: 8px; border-top: 1px solid rgba(225,29,72,0.2); padding-top: 8px; font-family: monospace; line-height: 1.3;">${errorTrace}</div>`, "bot");
             } finally {
                 userInput.disabled = false;
                 sendBtn.disabled = false;
-                sendBtn.innerText = "Send";
                 userInput.focus();
-                
                 isSending = false;
             }
         }
 
         function handleKeyPress(e) {
-            // Support Shift+Enter for new lines, Enter for sending
             if (e.key === "Enter" && !e.shiftKey) {
                 e.preventDefault();
                 sendMessage();
