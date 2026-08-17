@@ -3,7 +3,7 @@
 <head>
     <!-- 1. THE SELF-HEALING CACHE BUSTER -->
     <script>
-        const currentVersion = "3.1"; 
+        const currentVersion = "3.2"; 
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('v') !== currentVersion) {
             window.location.replace(window.location.pathname + '?v=' + currentVersion);
@@ -19,29 +19,44 @@
 </head>
 <body>
 
-    <!-- Slide-Out Hacker Terminal (Dev Mode) -->
+    <!-- Slide-Out Professional Dev Console -->
     <div class="backend-panel" id="backendPanel">
         <h2>
-            <span>[ SYSTEM_ARCHITECTURE_TERMINAL ]</span>
-            <button class="panel-close-btn" onclick="toggleBackend()">[X]</button>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+                Developer Console
+            </div>
+            <button class="panel-close-btn" onclick="toggleBackend()">×</button>
         </h2>
-        <p>> INITIALIZING LIVE TELEMETRY...<br>> MONITORING WEBHOOK TRAFFIC...<br>> AWAITING DATABASE SYNC...</p>
+        <p class="panel-subtitle">Live telemetry showing real-time event routing from the frontend UI into n8n Webhooks, Google Calendar, and CRM storage.</p>
         
         <!-- REQUIRED EMAIL ROUTING WITH RED ALERT -->
-        <span class="panel-label">>> LIVE_DEMO_ALERTS_ROUTING</span>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span class="panel-label" style="color: #cbd5e1; margin: 0; display: flex; align-items: center; gap: 8px;">
+                Destination Routing (Email) 
+                <span class="ping-dot" title="Action Suggested" id="input-ping"></span>
+            </span>
+        </div>
         <div style="margin-bottom: 30px; display: flex; gap: 10px;">
-            <input type="email" id="demo-alert-dest" placeholder="[ REQUIRED: ENTER_TARGET_EMAIL ]" oninput="checkEmailInput()">
+            <input type="email" id="demo-alert-dest" placeholder="[ REQUIRED: Enter target email for live lead alert ]" oninput="checkEmailInput()">
         </div>
 
-        <span class="panel-label">>> LIVE_SYSTEM_TELEMETRY</span>
-        <div class="sms-terminal" id="telemetryTerminal">
-            > SYSTEM ONLINE. LISTENING FOR WEBHOOKS...<br>
+        <!-- NEW COMMAND EMBED TERMINAL -->
+        <span class="panel-label" style="color: #cbd5e1; margin-top: 10px;">System Telemetry</span>
+        <div class="terminal-embed">
+            <div class="terminal-header">
+                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                <span class="title">admin@apex-servers: ~/logs</span>
+            </div>
+            <div class="sms-terminal" id="telemetryTerminal">
+                <span style="color: #64748b">[SYS]</span> > INIT: SYSTEM ONLINE. LISTENING ON PORT 5678...<br>
+            </div>
         </div>
 
         <!-- CALENDAR -->
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <span class="panel-label" style="margin: 0;">>> LIVE_CALENDAR_SYNC</span>
-            <button class="refresh-btn" onclick="refreshFrame('calendar-frame')" id="btn-calendar-frame" title="Force Refresh">🔄 [REFRESH]</button>
+            <span class="panel-label" style="margin: 0;">Live Calendar Sync</span>
+            <button class="refresh-btn" onclick="refreshFrame('calendar-frame')" id="btn-calendar-frame" title="Force Refresh">🔄 Refresh</button>
         </div>
         <div class="iframe-container">
             <iframe id="calendar-frame" src="https://calendar.google.com/calendar/embed?src=sakuramisakikawaii%40gmail.com&ctz=America%2FLos_Angeles"></iframe>
@@ -49,8 +64,8 @@
 
         <!-- DATABASE -->
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <span class="panel-label" style="margin: 0;">>> LEAD_DATABASE_CONNECTION</span>
-            <button class="refresh-btn" onclick="refreshFrame('sheets-frame')" id="btn-sheets-frame" title="Force Refresh">🔄 [REFRESH]</button>
+            <span class="panel-label" style="margin: 0;">Live CRM Database</span>
+            <button class="refresh-btn" onclick="refreshFrame('sheets-frame')" id="btn-sheets-frame" title="Force Refresh">🔄 Refresh</button>
         </div>
         <div class="iframe-container">
             <iframe id="sheets-frame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2No54tpOdLhI3xUyJf0few-si1qAvoKpib1KIuZM7AlQiJElqZCGtOXKL1PQQqC1vtlB3IyA4wdmW/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
