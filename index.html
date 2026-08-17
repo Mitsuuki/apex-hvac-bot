@@ -3,7 +3,7 @@
 <head>
     <!-- 1. THE SELF-HEALING CACHE BUSTER -->
     <script>
-        const currentVersion = "3.2"; 
+        const currentVersion = "3.3"; 
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('v') !== currentVersion) {
             window.location.replace(window.location.pathname + '?v=' + currentVersion);
@@ -15,7 +15,7 @@
     <title>Apex Home Services | Premier HVAC & Plumbing Solutions</title>
     
     <!-- External CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=3.3">
 </head>
 <body>
 
@@ -125,7 +125,8 @@
 
         <div class="services-grid">
             <div class="service-card fade-in delay-1">
-                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80&w=600')"></div>
+                <!-- INJECTED AIRCON CLEANING IMAGE -->
+                <div class="service-img" style="background-image: url('https://plus.unsplash.com/premium_photo-1682126009570-3fe2399162f7?auto=format&fit=crop&q=80&w=600')"></div>
                 <div class="service-content">
                     <span class="service-tag">Maintenance</span>
                     <h3>AC Tune-Up & Cleaning</h3>
@@ -137,7 +138,8 @@
             </div>
 
             <div class="service-card fade-in delay-2">
-                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&q=80&w=600')"></div>
+                <!-- INJECTED AC REPAIR DIAGNOSTIC IMAGE -->
+                <div class="service-img" style="background-image: url('https://plus.unsplash.com/premium_photo-1683134512538-7b390d0adc9e?auto=format&fit=crop&q=80&w=600')"></div>
                 <div class="service-content">
                     <span class="service-tag">Emergency Repair</span>
                     <h3>AC Diagnostics & Repair</h3>
@@ -149,7 +151,8 @@
             </div>
 
             <div class="service-card fade-in delay-3">
-                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1542013936693-8942b260a92d?auto=format&fit=crop&q=80&w=600')"></div>
+                <!-- INJECTED PLUMBING PIPE IMAGE -->
+                <div class="service-img" style="background-image: url('https://plus.unsplash.com/premium_photo-1663045495725-89f23b57cfc5?auto=format&fit=crop&q=80&w=600')"></div>
                 <div class="service-content">
                     <span class="service-tag">Plumbing</span>
                     <h3>Leaky Pipe & Plumbing Fix</h3>
@@ -185,6 +188,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=3.3"></script>
 </body>
 </html>
