@@ -23,6 +23,11 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; padding: 0; back
 .delay-2 { animation-delay: 0.3s; }
 .delay-3 { animation-delay: 0.5s; }
 
+/* --- NEW: PING DOT ANIMATION --- */
+.ping-dot { position: relative; width: 8px; height: 8px; background-color: #ef4444; border-radius: 50%; display: inline-block; }
+.ping-dot::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: #ef4444; border-radius: 50%; animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite; }
+@keyframes ping { 75%, 100% { transform: scale(2.5); opacity: 0; } }
+
 /* Navigation Header */
 header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 18px 50px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 50; border-bottom: 1px solid #e2e8f0; }
 
@@ -33,16 +38,11 @@ header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); pad
 .logo { font-size: 20px; font-weight: 800; color: var(--dark); display: flex; align-items: center; gap: 10px; letter-spacing: -0.5px; }
 .logo span { color: var(--primary); }
 .nav-right { display: flex; align-items: center; gap: 20px; }
-.dev-btn { background: #f1f5f9; color: var(--slate); border: 1px solid #cbd5e1; padding: 8px 16px; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+.dev-btn { background: #f1f5f9; color: var(--slate); border: 1px solid #cbd5e1; padding: 8px 16px; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
 .dev-btn:hover { background: #e2e8f0; color: var(--dark); }
 
 /* Immersive Hero Section */
-.hero { 
-    background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.75)), url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=1920') center/cover no-repeat; 
-    color: white; 
-    padding: 120px 20px 80px 20px; 
-    text-align: center; 
-}
+.hero { background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.75)), url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=1920') center/cover no-repeat; color: white; padding: 120px 20px 80px 20px; text-align: center; }
 .hero-badge { background: rgba(37, 99, 235, 0.2); border: 1px solid rgba(37, 99, 235, 0.4); color: #60a5fa; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 20px; }
 .hero h1 { font-size: 52px; font-weight: 800; margin-bottom: 20px; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.15; letter-spacing: -1px; }
 .hero p { font-size: 18px; opacity: 0.9; max-width: 600px; margin: 0 auto; line-height: 1.6; color: #cbd5e1; }
@@ -56,7 +56,6 @@ header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); pad
 .section-title { text-align: center; margin-bottom: 50px; }
 .section-title h2 { font-size: 36px; font-weight: 800; color: var(--dark); margin-bottom: 10px; letter-spacing: -0.5px; }
 .section-title p { color: var(--slate); font-size: 16px; }
-
 .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
 .service-card { background: white; border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); }
 .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.08); }
@@ -113,15 +112,20 @@ textarea#user-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px 
 .panel-close-btn { background: transparent; color: #94a3b8; border: none; font-size: 24px; cursor: pointer; }
 .panel-close-btn:hover { color: white; }
 
-/* --- NEW DEV PANEL STYLES --- */
-.demo-tip { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); padding: 12px 15px; border-radius: 8px; font-size: 13px; color: #93c5fd; margin-bottom: 15px; line-height: 1.5; animation: pulseGlow 3s infinite; }
-@keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.2); } 70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); } 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); } }
+/* --- NEW COMMAND EMBED STYLES --- */
+.terminal-embed { background: #000; border: 1px solid #1e293b; border-radius: 8px; overflow: hidden; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+.terminal-header { background: #0f172a; padding: 8px 12px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #1e293b; }
+.terminal-header .dot { width: 10px; height: 10px; border-radius: 50%; }
+.terminal-header .dot.red { background: #ef4444; }
+.terminal-header .dot.yellow { background: #f59e0b; }
+.terminal-header .dot.green { background: #10b981; }
+.terminal-header .title { margin-left: 10px; color: #64748b; font-size: 11px; font-family: monospace; }
+.sms-terminal { background: #000; color: #10b981; padding: 15px; height: 140px; overflow-y: auto; font-size: 13px; line-height: 1.6; font-family: 'Courier New', Courier, monospace; }
 
 .refresh-btn { background: transparent; border: 1px solid #3b82f6; color: #60a5fa; border-radius: 6px; cursor: pointer; padding: 4px 8px; font-size: 14px; transition: 0.2s; }
 .refresh-btn:hover { background: #3b82f6; color: white; }
 .refresh-btn.spinning { animation: spin 0.6s linear; }
 
-.sms-terminal { background: #050505; color: #34d399; padding: 15px; border: 1px solid #34d399; border-radius: 6px; height: 140px; overflow-y: auto; font-size: 13px; line-height: 1.6; margin-bottom: 30px; font-family: monospace;}
 .iframe-container { margin-bottom: 25px; background: white; border-radius: 12px; overflow: hidden; height: 320px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 .iframe-container iframe { width: 100%; height: 100%; border: none; }
 .panel-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #94a3b8; margin-bottom: 8px; display: block; font-weight: 700; }

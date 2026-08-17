@@ -3,7 +3,7 @@
 <head>
     <!-- 1. THE SELF-HEALING CACHE BUSTER -->
     <script>
-        const currentVersion = "2.9"; 
+        const currentVersion = "3.0"; 
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('v') !== currentVersion) {
             window.location.replace(window.location.pathname + '?v=' + currentVersion);
@@ -25,20 +25,29 @@
             <span>⚙️ Architecture Control Room</span>
             <button class="panel-close-btn" onclick="toggleBackend()">×</button>
         </h2>
+        <p style="color: #94a3b8; font-size: 13px; margin-bottom: 25px; line-height: 1.6;">Live telemetry showing real-time event routing from the frontend UI into n8n Webhooks, Google Calendar, and CRM storage.</p>
         
-        <!-- TELEMETRY TERMINAL (Shows the live checklist) -->
-        <span class="panel-label" style="color: #34d399; margin-top: 10px;">>> LIVE SYSTEM TELEMETRY</span>
-        <div class="sms-terminal" id="telemetryTerminal">
-            > SYSTEM ONLINE. LISTENING FOR WEBHOOKS...<br>
+        <!-- LIVE DEMO ROUTING INPUT (With subtle ping) -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span class="panel-label" style="color: #60a5fa; margin: 0; display: flex; align-items: center; gap: 8px;">
+                >> Live Demo Alerts (Email) 
+                <span class="ping-dot" title="Action Suggested"></span>
+            </span>
+        </div>
+        <div style="margin-bottom: 30px; display: flex; gap: 10px;">
+            <input type="email" id="demo-alert-dest" placeholder="Enter your email to receive live lead alert..." style="flex: 1; padding: 12px; background: #0f172a; border: 1px solid #3b82f6; color: #60a5fa; font-family: monospace; outline: none; border-radius: 6px;">
         </div>
 
-        <!-- DEMO ROUTING (With Instruction) -->
-        <div class="demo-tip">
-            <strong>🎯 Demo Tip for Mario:</strong> Enter the client's email below <i>before</i> they finish booking to trigger a live lead notification directly to their phone!
-        </div>
-        <span class="panel-label" style="color: #60a5fa;">>> LIVE DEMO ALERTS (EMAIL DESTINATION)</span>
-        <div style="margin-bottom: 30px; display: flex; gap: 10px;">
-            <input type="email" id="demo-alert-dest" placeholder="Enter client's email to route lead..." style="flex: 1; padding: 12px; background: #0f172a; border: 1px solid #3b82f6; color: #60a5fa; font-family: monospace; outline: none; border-radius: 6px;">
+        <!-- NEW COMMAND EMBED TERMINAL -->
+        <span class="panel-label" style="color: #10b981; margin-top: 10px;">>> LIVE SYSTEM TELEMETRY</span>
+        <div class="terminal-embed">
+            <div class="terminal-header">
+                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                <span class="title">admin@apex-servers: ~/n8n/webhooks</span>
+            </div>
+            <div class="sms-terminal" id="telemetryTerminal">
+                <span style="color: #64748b">[SYS]</span> > INIT: SYSTEM ONLINE. LISTENING ON PORT 5678...<br>
+            </div>
         </div>
 
         <!-- CALENDAR WITH REFRESH BUTTON -->
@@ -69,7 +78,11 @@
             <div class="logo">🛠️ Apex <span>Home Services</span></div>
         </div>
         <div class="nav-right">
-            <button class="dev-btn" onclick="toggleBackend()">⚙️ View Backend (Dev Mode)</button>
+            <!-- PING DOT ADDED TO DEV BUTTON -->
+            <button class="dev-btn" onclick="toggleBackend()">
+                ⚙️ View Backend (Dev Mode)
+                <span class="ping-dot"></span>
+            </button>
         </div>
     </header>
 
@@ -80,6 +93,7 @@
         <p class="fade-in delay-2">Experience lightning-fast diagnostics, transparent flat-rate pricing, and instant automated scheduling handled seamlessly by our virtual dispatcher.</p>
     </section>
 
+    <!-- Value Props -->
     <section class="value-props fade-in delay-3">
         <div class="services-grid" style="max-width: 1200px; margin: 0 auto;">
             <div class="service-card" style="box-shadow: none; border: none; text-align: center; background: transparent;">
