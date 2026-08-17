@@ -3,6 +3,20 @@ const N8N_WEBHOOK_URL = "https://ships-generators-relative-wma.trycloudflare.com
 
 let isSending = false;
 
+// --- EMAIL PING LOGIC ---
+function checkEmailInput() {
+    const emailInput = document.getElementById("demo-alert-dest");
+    const ping = document.getElementById("dev-ping");
+    
+    if(emailInput.value.trim() !== "") {
+        ping.style.display = "none";
+        emailInput.classList.add("filled");
+    } else {
+        ping.style.display = "inline-block";
+        emailInput.classList.remove("filled");
+    }
+}
+
 function toggleBackend() { 
     document.getElementById('backendPanel').classList.toggle('open'); 
 }
@@ -94,11 +108,6 @@ function appendButtons(buttonsArray) {
 function showTyping() { typingIndicator.style.display = "flex"; chatBox.scrollTop = chatBox.scrollHeight; }
 function hideTyping() { typingIndicator.style.display = "none"; }
 
-function getTimestamp() {
-    const now = new Date();
-    return now.toLocaleTimeString('en-US', { hour12: false });
-}
-
 async function sendMessage() {
     if (isSending) return;
     const text = userInput.value.trim();
@@ -118,8 +127,8 @@ async function sendMessage() {
     try {
         const demoDest = document.getElementById("demo-alert-dest") ? document.getElementById("demo-alert-dest").value.trim() : "";
 
-        // Log the outbound request in the terminal
-        term.innerHTML += `<br><span style="color: #64748b">[${getTimestamp()}]</span> > Executing Webhook Payload... <span style="color:white">[OK]</span>`;
+        // COMMAND LINE LOGIC
+        term.innerHTML += `<br>> TRANSMITTING PAYLOAD TO ENGINE... <span style="color:#fff">[OK]</span>`;
         term.scrollTop = term.scrollHeight;
 
         const liveUrl = N8N_WEBHOOK_URL + "?t=" + Date.now();
@@ -139,40 +148,34 @@ async function sendMessage() {
         appendMessage(data.text || "Sorry, I encountered an error.", "bot");
         if (data.buttons) { appendButtons(data.buttons); }
 
-        // --- COMMAND EMBED TELEMETRY SEQUENCE ---
         if (data.text.includes("scheduled") || data.text.includes("saved") || text.toLowerCase().includes("book") || text.toLowerCase().includes("pm") || text.toLowerCase().includes("am")) {
             
-            // Step 1: Database Sync
             setTimeout(() => {
-                term.innerHTML += `<br><span style="color: #64748b">[${getTimestamp()}]</span> > SQL_INSERT into public.leads... <span style="color:#10b981">[SUCCESS]</span>`;
+                term.innerHTML += `<br>> PUSHING LEAD TO DATABASE... <span style="color:#fff">[SUCCESS]</span>`;
                 term.scrollTop = term.scrollHeight;
             }, 800);
 
-            // Step 2: Calendar Sync
             setTimeout(() => {
-                term.innerHTML += `<br><span style="color: #64748b">[${getTimestamp()}]</span> > POST https://www.googleapis.com/calendar/v3/calendars... <span style="color:#10b981">[SUCCESS]</span>`;
+                term.innerHTML += `<br>> SYNCING TO GOOGLE CALENDAR... <span style="color:#fff">[SUCCESS]</span>`;
                 term.scrollTop = term.scrollHeight;
             }, 1800);
 
-            // Step 3: Dispatch Alert & Play Ding!
             setTimeout(() => {
                 if (demoDest) {
-                    term.innerHTML += `<br><span style="color: #64748b">[${getTimestamp()}]</span> > DISPATCH_ALERT: Routing notification to <b>${demoDest}</b>... <span style="color:#f59e0b">[SENT]</span>`;
+                    term.innerHTML += `<br>> DISPATCH_ALERT ROUTED TO: <b>${demoDest}</b>... <span style="color:#fff">[SENT]</span>`;
                     
-                    // Play subtle notification ding
                     try {
                         let ding = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
                         ding.volume = 0.6;
                         ding.play();
-                    } catch(e) { console.log("Audio blocked by browser"); }
+                    } catch(e) {}
                     
-                    // Automatically slide open the dev panel
                     const panel = document.getElementById("backendPanel");
                     if (!panel.classList.contains("open")) {
                         panel.classList.add("open");
                     }
                 } else {
-                    term.innerHTML += `<br><span style="color: #64748b">[${getTimestamp()}]</span> > <span style="color:#94a3b8">WARN: No alert destination provided. Skipping email dispatch.</span>`;
+                    term.innerHTML += `<br>> <span style="color:#ef4444">WARN: NO TARGET EMAIL PROVIDED. SKIPPING DISPATCH.</span>`;
                 }
                 term.scrollTop = term.scrollHeight;
             }, 3000);
@@ -182,8 +185,7 @@ async function sendMessage() {
         hideTyping();
         console.error("Transmission Error:", error);
         appendMessage("Network error or outdated browser detected. Please check your connection or call us directly.", "bot");
-        
-        term.innerHTML += `<br><span style="color: #64748b">[${getTimestamp()}]</span> > <span style="color:#e11d48">FATAL: Webhook transmission failed.</span>`;
+        term.innerHTML += `<br>> <span style="color:#ef4444">FATAL: WEBHOOK TRANSMISSION FAILED.</span>`;
     } finally {
         userInput.disabled = false;
         sendBtn.disabled = false;

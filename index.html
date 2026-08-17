@@ -3,7 +3,7 @@
 <head>
     <!-- 1. THE SELF-HEALING CACHE BUSTER -->
     <script>
-        const currentVersion = "3.0"; 
+        const currentVersion = "3.1"; 
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('v') !== currentVersion) {
             window.location.replace(window.location.pathname + '?v=' + currentVersion);
@@ -19,50 +19,38 @@
 </head>
 <body>
 
-    <!-- Slide-Out Backend Control Room (Dev Mode) -->
+    <!-- Slide-Out Hacker Terminal (Dev Mode) -->
     <div class="backend-panel" id="backendPanel">
         <h2>
-            <span>⚙️ Architecture Control Room</span>
-            <button class="panel-close-btn" onclick="toggleBackend()">×</button>
+            <span>[ SYSTEM_ARCHITECTURE_TERMINAL ]</span>
+            <button class="panel-close-btn" onclick="toggleBackend()">[X]</button>
         </h2>
-        <p style="color: #94a3b8; font-size: 13px; margin-bottom: 25px; line-height: 1.6;">Live telemetry showing real-time event routing from the frontend UI into n8n Webhooks, Google Calendar, and CRM storage.</p>
+        <p>> INITIALIZING LIVE TELEMETRY...<br>> MONITORING WEBHOOK TRAFFIC...<br>> AWAITING DATABASE SYNC...</p>
         
-        <!-- LIVE DEMO ROUTING INPUT (With subtle ping) -->
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <span class="panel-label" style="color: #60a5fa; margin: 0; display: flex; align-items: center; gap: 8px;">
-                >> Live Demo Alerts (Email) 
-                <span class="ping-dot" title="Action Suggested"></span>
-            </span>
-        </div>
+        <!-- REQUIRED EMAIL ROUTING WITH RED ALERT -->
+        <span class="panel-label">>> LIVE_DEMO_ALERTS_ROUTING</span>
         <div style="margin-bottom: 30px; display: flex; gap: 10px;">
-            <input type="email" id="demo-alert-dest" placeholder="Enter your email to receive live lead alert..." style="flex: 1; padding: 12px; background: #0f172a; border: 1px solid #3b82f6; color: #60a5fa; font-family: monospace; outline: none; border-radius: 6px;">
+            <input type="email" id="demo-alert-dest" placeholder="[ REQUIRED: ENTER_TARGET_EMAIL ]" oninput="checkEmailInput()">
         </div>
 
-        <!-- NEW COMMAND EMBED TERMINAL -->
-        <span class="panel-label" style="color: #10b981; margin-top: 10px;">>> LIVE SYSTEM TELEMETRY</span>
-        <div class="terminal-embed">
-            <div class="terminal-header">
-                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                <span class="title">admin@apex-servers: ~/n8n/webhooks</span>
-            </div>
-            <div class="sms-terminal" id="telemetryTerminal">
-                <span style="color: #64748b">[SYS]</span> > INIT: SYSTEM ONLINE. LISTENING ON PORT 5678...<br>
-            </div>
+        <span class="panel-label">>> LIVE_SYSTEM_TELEMETRY</span>
+        <div class="sms-terminal" id="telemetryTerminal">
+            > SYSTEM ONLINE. LISTENING FOR WEBHOOKS...<br>
         </div>
 
-        <!-- CALENDAR WITH REFRESH BUTTON -->
+        <!-- CALENDAR -->
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <span class="panel-label" style="margin: 0;">Live Google Calendar Sync</span>
-            <button class="refresh-btn" onclick="refreshFrame('calendar-frame')" id="btn-calendar-frame" title="Refresh Calendar">🔄</button>
+            <span class="panel-label" style="margin: 0;">>> LIVE_CALENDAR_SYNC</span>
+            <button class="refresh-btn" onclick="refreshFrame('calendar-frame')" id="btn-calendar-frame" title="Force Refresh">🔄 [REFRESH]</button>
         </div>
         <div class="iframe-container">
-            <iframe id="calendar-frame" src="https://calendar.google.com/calendar/embed?src=sakuramisakikawaii%40gmail.com&ctz=America%2FLos_Angeles" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+            <iframe id="calendar-frame" src="https://calendar.google.com/calendar/embed?src=sakuramisakikawaii%40gmail.com&ctz=America%2FLos_Angeles"></iframe>
         </div>
 
-        <!-- DATABASE WITH REFRESH BUTTON -->
+        <!-- DATABASE -->
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <span class="panel-label" style="margin: 0;">Live Database (Google Sheets CRM)</span>
-            <button class="refresh-btn" onclick="refreshFrame('sheets-frame')" id="btn-sheets-frame" title="Refresh Database">🔄</button>
+            <span class="panel-label" style="margin: 0;">>> LEAD_DATABASE_CONNECTION</span>
+            <button class="refresh-btn" onclick="refreshFrame('sheets-frame')" id="btn-sheets-frame" title="Force Refresh">🔄 [REFRESH]</button>
         </div>
         <div class="iframe-container">
             <iframe id="sheets-frame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2No54tpOdLhI3xUyJf0few-si1qAvoKpib1KIuZM7AlQiJElqZCGtOXKL1PQQqC1vtlB3IyA4wdmW/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
@@ -78,10 +66,9 @@
             <div class="logo">🛠️ Apex <span>Home Services</span></div>
         </div>
         <div class="nav-right">
-            <!-- PING DOT ADDED TO DEV BUTTON -->
             <button class="dev-btn" onclick="toggleBackend()">
                 ⚙️ View Backend (Dev Mode)
-                <span class="ping-dot"></span>
+                <span class="urgent-ping" id="dev-ping"></span>
             </button>
         </div>
     </header>
@@ -173,7 +160,6 @@
         </div>
         <div class="chat-box" id="chat-box">
             <div class="msg bot">Hi there! Need an AC repair or plumbing fix? Let me know how I can help.</div>
-            
             <div id="typing-indicator" class="typing-indicator">
                 <span></span><span></span><span></span>
             </div>
@@ -184,7 +170,6 @@
         </div>
     </div>
 
-    <!-- External JS -->
     <script src="script.js"></script>
 </body>
 </html>
