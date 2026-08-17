@@ -3,14 +3,13 @@
 <head>
     <!-- 1. THE SELF-HEALING CACHE BUSTER -->
     <script>
-        const currentVersion = "2.8"; 
+        const currentVersion = "2.9"; 
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('v') !== currentVersion) {
             window.location.replace(window.location.pathname + '?v=' + currentVersion);
         }
     </script>
     
-    <!-- 2. MOBILE ZOOM FIX -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, interactive-widget=resizes-content">
     <meta charset="UTF-8">
     <title>Apex Home Services | Premier HVAC & Plumbing Solutions</title>
@@ -26,22 +25,38 @@
             <span>⚙️ Architecture Control Room</span>
             <button class="panel-close-btn" onclick="toggleBackend()">×</button>
         </h2>
-        <p style="color: #94a3b8; font-size: 13px; margin-bottom: 25px; line-height: 1.6;">Live telemetry showing real-time event routing from the frontend UI into n8n Webhooks, Google Calendar, and CRM storage.</p>
         
-        <!-- LIVE DEMO ROUTING INPUT -->
-        <span class="panel-label" style="color: #60a5fa;">>> LIVE DEMO ALERTS (EMAIL)</span>
+        <!-- TELEMETRY TERMINAL (Shows the live checklist) -->
+        <span class="panel-label" style="color: #34d399; margin-top: 10px;">>> LIVE SYSTEM TELEMETRY</span>
+        <div class="sms-terminal" id="telemetryTerminal">
+            > SYSTEM ONLINE. LISTENING FOR WEBHOOKS...<br>
+        </div>
+
+        <!-- DEMO ROUTING (With Instruction) -->
+        <div class="demo-tip">
+            <strong>🎯 Demo Tip for Mario:</strong> Enter the client's email below <i>before</i> they finish booking to trigger a live lead notification directly to their phone!
+        </div>
+        <span class="panel-label" style="color: #60a5fa;">>> LIVE DEMO ALERTS (EMAIL DESTINATION)</span>
         <div style="margin-bottom: 30px; display: flex; gap: 10px;">
             <input type="email" id="demo-alert-dest" placeholder="Enter client's email to route lead..." style="flex: 1; padding: 12px; background: #0f172a; border: 1px solid #3b82f6; color: #60a5fa; font-family: monospace; outline: none; border-radius: 6px;">
         </div>
 
-        <span class="panel-label">Live Google Calendar Sync</span>
+        <!-- CALENDAR WITH REFRESH BUTTON -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span class="panel-label" style="margin: 0;">Live Google Calendar Sync</span>
+            <button class="refresh-btn" onclick="refreshFrame('calendar-frame')" id="btn-calendar-frame" title="Refresh Calendar">🔄</button>
+        </div>
         <div class="iframe-container">
-            <iframe src="https://calendar.google.com/calendar/embed?src=sakuramisakikawaii%40gmail.com&ctz=America%2FLos_Angeles" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+            <iframe id="calendar-frame" src="https://calendar.google.com/calendar/embed?src=sakuramisakikawaii%40gmail.com&ctz=America%2FLos_Angeles" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
         </div>
 
-        <span class="panel-label">Live Database (Google Sheets CRM)</span>
+        <!-- DATABASE WITH REFRESH BUTTON -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span class="panel-label" style="margin: 0;">Live Database (Google Sheets CRM)</span>
+            <button class="refresh-btn" onclick="refreshFrame('sheets-frame')" id="btn-sheets-frame" title="Refresh Database">🔄</button>
+        </div>
         <div class="iframe-container">
-            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2No54tpOdLhI3xUyJf0few-si1qAvoKpib1KIuZM7AlQiJElqZCGtOXKL1PQQqC1vtlB3IyA4wdmW/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+            <iframe id="sheets-frame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2No54tpOdLhI3xUyJf0few-si1qAvoKpib1KIuZM7AlQiJElqZCGtOXKL1PQQqC1vtlB3IyA4wdmW/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
         </div>
     </div>
 
@@ -65,7 +80,6 @@
         <p class="fade-in delay-2">Experience lightning-fast diagnostics, transparent flat-rate pricing, and instant automated scheduling handled seamlessly by our virtual dispatcher.</p>
     </section>
 
-    <!-- PRIORITY 2: VALUE PROPOSITION / FEATURES SECTION -->
     <section class="value-props fade-in delay-3">
         <div class="services-grid" style="max-width: 1200px; margin: 0 auto;">
             <div class="service-card" style="box-shadow: none; border: none; text-align: center; background: transparent;">

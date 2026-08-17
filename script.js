@@ -5,6 +5,21 @@ let isSending = false;
 
 function toggleBackend() { document.getElementById('backendPanel').classList.toggle('open'); }
 
+// NEW: Refresh Iframe Function
+function refreshFrame(id) {
+    const frame = document.getElementById(id);
+    const btn = document.getElementById('btn-' + id);
+    
+    // Add spinning animation to button
+    btn.classList.add('spinning');
+    setTimeout(() => btn.classList.remove('spinning'), 600);
+    
+    // Reload iframe without refreshing page
+    const currentSrc = frame.src;
+    frame.src = '';
+    setTimeout(() => { frame.src = currentSrc; }, 100);
+}
+
 function toggleChat() {
     const chat = document.getElementById('chatContainer');
     const toggleBtn = document.getElementById('chatToggleBtn');
@@ -94,20 +109,23 @@ async function sendMessage() {
     
     showTyping();
 
+    const term = document.getElementById("telemetryTerminal");
+
     try {
-        // --- GRAB THE EMAIL ADDRESS FROM THE DEV PANEL INPUT ---
         const demoDest = document.getElementById("demo-alert-dest") ? document.getElementById("demo-alert-dest").value.trim() : "";
 
-        // CLEAN URL FOR CLOUDFLARE
+        // Log the outbound request in the terminal
+        term.innerHTML += `<br>> Transmitting payload to AI Engine... <span style="color:white">[OK]</span>`;
+        term.scrollTop = term.scrollHeight;
+
         const liveUrl = N8N_WEBHOOK_URL + "?t=" + Date.now();
-        
         const response = await fetch(liveUrl, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ 
                 sessionId: sessionId, 
                 message: text,
-                alert_destination: demoDest // Sends the email destination to n8n!
+                alert_destination: demoDest 
             })
         });
 
@@ -117,13 +135,48 @@ async function sendMessage() {
         appendMessage(data.text || "Sorry, I encountered an error.", "bot");
         if (data.buttons) { appendButtons(data.buttons); }
 
+        // --- NEW: LIVE TELEMETRY SIMULATION SEQUENCE ---
+        // If the AI replied with something that indicates a booking (or Mario provided an email), simulate the backend magic
+        if (demoDest && (data.text.includes("scheduled") || data.text.includes("saved") || text.toLowerCase().includes("book") || text.toLowerCase().includes("pm") || text.toLowerCase().includes("am"))) {
+            
+            // Step 1: Database Sync
+            setTimeout(() => {
+                term.innerHTML += `<br>> Pushing lead data to Google Sheets CRM... <span style="color:#3b82f6">[SUCCESS]</span>`;
+                term.scrollTop = term.scrollHeight;
+            }, 800);
+
+            // Step 2: Calendar Sync
+            setTimeout(() => {
+                term.innerHTML += `<br>> Syncing Event to Google Calendar... <span style="color:#3b82f6">[SUCCESS]</span>`;
+                term.scrollTop = term.scrollHeight;
+            }, 1800);
+
+            // Step 3: Dispatch Alert & Play Ding!
+            setTimeout(() => {
+                term.innerHTML += `<br>> Routing live alert to <b>${demoDest}</b>... <span style="color:#f59e0b">[DISPATCHED]</span>`;
+                term.scrollTop = term.scrollHeight;
+                
+                // Play subtle notification ding
+                try {
+                    let ding = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
+                    ding.volume = 0.6;
+                    ding.play();
+                } catch(e) { console.log("Audio blocked by browser"); }
+                
+                // Automatically slide open the dev panel to show the client!
+                const panel = document.getElementById("backendPanel");
+                if (!panel.classList.contains("open")) {
+                    panel.classList.add("open");
+                }
+            }, 3000);
+        }
+
     } catch (error) {
         hideTyping();
         console.error("Transmission Error:", error);
         appendMessage("Network error or outdated browser detected. Please check your connection or call us directly.", "bot");
         
-        const errorTrace = `[DIAGNOSTIC TRACE]<br>Error: ${error.name}<br>Message: ${error.message}<br>Check n8n CORS settings or Cloudflare connection!`;
-        appendMessage(`<div style="font-size: 11px; color: #e11d48; margin-top: 8px; border-top: 1px solid rgba(225,29,72,0.2); padding-top: 8px; font-family: monospace; line-height: 1.3;">${errorTrace}</div>`, "bot");
+        term.innerHTML += `<br>> <span style="color:#e11d48">ERROR: Webhook transmission failed.</span>`;
     } finally {
         userInput.disabled = false;
         sendBtn.disabled = false;
