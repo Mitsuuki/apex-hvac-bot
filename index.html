@@ -3,7 +3,7 @@
 <head>
     <!-- 1. THE SELF-HEALING CACHE BUSTER -->
     <script>
-        const currentVersion = "2.1"; 
+        const currentVersion = "2.8"; 
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('v') !== currentVersion) {
             window.location.replace(window.location.pathname + '?v=' + currentVersion);
@@ -14,136 +14,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, interactive-widget=resizes-content">
     <meta charset="UTF-8">
     <title>Apex Home Services | Premier HVAC & Plumbing Solutions</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --dark: #0f172a;
-            --slate: #475569;
-            --light: #f8fafc;
-            --accent: #f59e0b;
-        }
-
-        body { font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; padding: 0; background: var(--light); color: var(--dark); overflow-x: hidden; scroll-behavior: smooth; }
-
-        /* Navigation Header */
-        header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 18px 50px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 50; border-bottom: 1px solid #e2e8f0; }
-        
-        /* --- ADDED BACK BUTTON & WRAPPER --- */
-        .header-left { display: flex; align-items: center; gap: 15px; }
-        .back-btn { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #f1f5f9; color: var(--slate); border: 1px solid #cbd5e1; text-decoration: none; transition: 0.3s; }
-        .back-btn:hover { background: var(--primary); color: white; border-color: var(--primary); transform: translateX(-3px); }
-        
-        .logo { font-size: 20px; font-weight: 800; color: var(--dark); display: flex; align-items: center; gap: 10px; letter-spacing: -0.5px; }
-        .logo span { color: var(--primary); }
-        .nav-right { display: flex; align-items: center; gap: 20px; }
-        .dev-btn { background: #f1f5f9; color: var(--slate); border: 1px solid #cbd5e1; padding: 8px 16px; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 6px; }
-        .dev-btn:hover { background: #e2e8f0; color: var(--dark); }
-
-        /* Immersive Hero Section */
-        .hero { 
-            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.75)), url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=1920') center/cover no-repeat; 
-            color: white; 
-            padding: 120px 20px 100px 20px; 
-            text-align: center; 
-        }
-        .hero-badge { background: rgba(37, 99, 235, 0.2); border: 1px solid rgba(37, 99, 235, 0.4); color: #60a5fa; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 20px; }
-        .hero h1 { font-size: 52px; font-weight: 800; margin-bottom: 20px; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.15; letter-spacing: -1px; }
-        .hero p { font-size: 18px; opacity: 0.9; max-width: 600px; margin: 0 auto 40px auto; line-height: 1.6; color: #cbd5e1; }
-
-        /* Trust Badges Bar */
-        .trust-strip { background: white; padding: 30px 50px; display: flex; justify-content: center; gap: 60px; border-bottom: 1px solid #e2e8f0; flex-wrap: wrap; }
-        .trust-item { display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 14px; color: var(--slate); }
-        .trust-item span { color: var(--primary); font-size: 20px; }
-
-        /* Services Grid Section */
-        .services-section { max-width: 1200px; margin: 80px auto; padding: 0 20px; }
-        .section-title { text-align: center; margin-bottom: 50px; }
-        .section-title h2 { font-size: 36px; font-weight: 800; color: var(--dark); margin-bottom: 10px; letter-spacing: -0.5px; }
-        .section-title p { color: var(--slate); font-size: 16px; }
-
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .service-card { background: white; border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); }
-        .service-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.08); }
-        .service-img { height: 200px; background-size: cover; background-position: center; }
-        .service-content { padding: 30px; }
-        .service-tag { color: var(--primary); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: block; }
-        .service-card h3 { font-size: 20px; font-weight: 700; margin: 0 0 10px 0; color: var(--dark); }
-        .service-card p { color: var(--slate); font-size: 14px; line-height: 1.5; margin-bottom: 20px; }
-        .service-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f1f5f9; padding-top: 15px; font-weight: 700; font-size: 16px; color: var(--dark); }
-        .service-footer span { color: var(--primary); font-size: 14px; cursor: pointer; }
-
-        /* Chat Toggle Button */
-        .chat-toggle { position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 28px; box-shadow: 0 10px 25px rgba(37,99,235,0.4); cursor: pointer; z-index: 100; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease; display: flex; align-items: center; justify-content: center; }
-        .chat-toggle:hover { transform: scale(1.05); background: var(--primary-dark); }
-        .chat-toggle.hidden { transform: scale(0); opacity: 0; pointer-events: none; }
-
-        /* Floating Chat Widget */
-        .chat-container { position: fixed; bottom: 30px; right: 30px; width: 380px; background: white; border-radius: 20px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); display: flex; flex-direction: column; overflow: hidden; border: 1px solid #e2e8f0; z-index: 101; transform: scale(0); transform-origin: bottom right; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease; opacity: 0; pointer-events: none; }
-        .chat-container.open { transform: scale(1); opacity: 1; pointer-events: auto; }
-        .chat-header { background: var(--primary); color: white; padding: 18px 20px; font-weight: 700; display: flex; align-items: center; justify-content: space-between; }
-        .chat-header-left { display: flex; align-items: center; gap: 12px; }
-        .chat-header .dot { width: 10px; height: 10px; background: #34d399; border-radius: 50%; box-shadow: 0 0 10px #34d399; }
-        .close-chat-btn { background: none; border: none; color: white; font-size: 24px; cursor: pointer; line-height: 1; padding: 0; opacity: 0.8; transition: 0.2s; }
-        .close-chat-btn:hover { opacity: 1; }
-        .chat-box { height: 380px; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; background: #f8fafc; }
-        .msg { max-width: 85%; padding: 12px 16px; border-radius: 14px; font-size: 14px; line-height: 1.4; word-wrap: break-word; }
-        .msg.bot { background: white; align-self: flex-start; border: 1px solid #e2e8f0; border-bottom-left-radius: 4px; color: var(--dark); box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        .msg.user { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 500; }
-        
-        /* --- ADDED TYPING INDICATOR CSS --- */
-        .typing-indicator { display: none; align-items: center; gap: 4px; padding: 12px 16px; width: fit-content; background: white; align-self: flex-start; border: 1px solid #e2e8f0; border-bottom-left-radius: 4px; border-radius: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);}
-        .typing-indicator span { display: block; width: 6px; height: 6px; background-color: var(--slate); border-radius: 50%; animation: typing 1.4s infinite ease-in-out both; }
-        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
-        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
-        @keyframes typing { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
-
-        /* --- UPDATED TEXTAREA CSS --- */
-        .chat-input-area { padding: 15px; background: white; border-top: 1px solid #e2e8f0; display: flex; gap: 10px; align-items: flex-end; }
-        textarea#user-input { flex: 1; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 10px; outline: none; font-size: 14px; transition: border 0.2s; font-family: 'Plus Jakarta Sans', sans-serif; resize: none; max-height: 120px; min-height: 20px; box-sizing: border-box; overflow-y: hidden; line-height: 1.5; }
-        textarea#user-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
-        .send-btn { background: var(--primary); color: white; border: none; padding: 0 20px; border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 14px; transition: background 0.2s; height: 44px; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;}
-        .send-btn:hover { background: var(--primary-dark); }
-        .send-btn:disabled { background: #94a3b8; cursor: not-allowed; }
-
-        /* Quick Reply Buttons */
-        .btn-container { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; margin-top: 5px; }
-        .quick-reply { background: white; border: 1px solid var(--primary); color: var(--primary); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s; }
-        .quick-reply:hover { background: #eff6ff; transform: scale(1.02); }
-
-        /* Slide-Out Control Panel (Dev Mode) */
-        .backend-panel { position: fixed; top: 0; left: -650px; width: 600px; height: 100vh; background: #0b0f19; color: white; z-index: 200; padding: 30px; box-sizing: border-box; overflow-y: auto; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 20px 0 50px rgba(0,0,0,0.5); border-right: 1px solid #1e293b; }
-        .backend-panel.open { left: 0; }
-        .backend-panel h2 { margin-top: 0; border-bottom: 1px solid #1e293b; padding-bottom: 15px; color: #60a5fa; display: flex; align-items: center; justify-content: space-between; font-size: 18px; }
-        .panel-close-btn { background: transparent; color: #94a3b8; border: none; font-size: 24px; cursor: pointer; }
-        .panel-close-btn:hover { color: white; }
-        .iframe-container { margin-bottom: 25px; background: white; border-radius: 12px; overflow: hidden; height: 320px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-        .iframe-container iframe { width: 100%; height: 100%; border: none; }
-        .panel-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #94a3b8; margin-bottom: 8px; display: block; font-weight: 700; }
-
-        /* --- MOBILE RESPONSIVENESS --- */
-        @media (max-width: 768px) {
-            header { padding: 15px 20px; flex-direction: column; gap: 15px; }
-            .hero { padding: 80px 20px 60px; }
-            .hero h1 { font-size: 36px; }
-            .trust-strip { flex-direction: column; gap: 20px; align-items: center; text-align: center; padding: 20px; }
-            .section-title h2 { font-size: 28px; }
-            
-            /* Responsive Dev Panel */
-            .backend-panel { width: 100%; left: -100%; padding: 20px; }
-            
-            /* Responsive Chat Widget */
-            .chat-toggle { bottom: 20px; right: 20px; width: 55px; height: 55px; font-size: 24px; }
-            .chat-container { 
-                width: calc(100% - 40px); 
-                right: 20px; 
-                bottom: 20px; 
-            }
-            .chat-box { height: 350px; }
-        }
-    </style>
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -155,9 +28,15 @@
         </h2>
         <p style="color: #94a3b8; font-size: 13px; margin-bottom: 25px; line-height: 1.6;">Live telemetry showing real-time event routing from the frontend UI into n8n Webhooks, Google Calendar, and CRM storage.</p>
         
+        <!-- LIVE DEMO ROUTING INPUT -->
+        <span class="panel-label" style="color: #60a5fa;">>> LIVE DEMO ALERTS (EMAIL)</span>
+        <div style="margin-bottom: 30px; display: flex; gap: 10px;">
+            <input type="email" id="demo-alert-dest" placeholder="Enter client's email to route lead..." style="flex: 1; padding: 12px; background: #0f172a; border: 1px solid #3b82f6; color: #60a5fa; font-family: monospace; outline: none; border-radius: 6px;">
+        </div>
+
         <span class="panel-label">Live Google Calendar Sync</span>
         <div class="iframe-container">
-            <iframe src="https://calendar.google.com/calendar/embed?src=sakuramisakikawaii%40gmail.com&ctz=Asia%2FManila" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+            <iframe src="https://calendar.google.com/calendar/embed?src=sakuramisakikawaii%40gmail.com&ctz=America%2FLos_Angeles" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
         </div>
 
         <span class="panel-label">Live Database (Google Sheets CRM)</span>
@@ -168,7 +47,6 @@
 
     <!-- Navigation Header -->
     <header>
-        <!-- BACK BUTTON ADDED HERE -->
         <div class="header-left">
             <a href="https://mitsuuki.github.io/demo-hub/" class="back-btn" title="Back to Hub">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
@@ -182,28 +60,41 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-badge">⚡ 24/7 AI-Powered Dispatching</div>
-        <h1>Enterprise-Grade HVAC & Plumbing Solutions</h1>
-        <p>Experience lightning-fast diagnostics, transparent flat-rate pricing, and instant automated scheduling handled seamlessly by our virtual dispatcher.</p>
+        <div class="hero-badge fade-in">⚡ 24/7 AI-Powered Dispatching</div>
+        <h1 class="fade-in delay-1">Enterprise-Grade HVAC & Plumbing Solutions</h1>
+        <p class="fade-in delay-2">Experience lightning-fast diagnostics, transparent flat-rate pricing, and instant automated scheduling handled seamlessly by our virtual dispatcher.</p>
     </section>
 
-    <!-- Trust Strip -->
-    <div class="trust-strip">
-        <div class="trust-item"><span>✓</span> Licensed & Insured Experts</div>
-        <div class="trust-item"><span>✓</span> 100% Satisfaction Guarantee</div>
-        <div class="trust-item"><span>✓</span> Zero Hidden Dispatch Fees</div>
-        <div class="trust-item"><span>✓</span> Real-Time Instant Booking</div>
-    </div>
+    <!-- PRIORITY 2: VALUE PROPOSITION / FEATURES SECTION -->
+    <section class="value-props fade-in delay-3">
+        <div class="services-grid" style="max-width: 1200px; margin: 0 auto;">
+            <div class="service-card" style="box-shadow: none; border: none; text-align: center; background: transparent;">
+                <div style="font-size: 40px; margin-bottom: 15px;">🌐</div>
+                <h3 style="font-size: 18px;">Omnichannel Funnel</h3>
+                <p style="font-size: 14px; color: var(--slate);">Capture leads natively from your Website, Facebook, and Instagram into one master database automatically.</p>
+            </div>
+            <div class="service-card" style="box-shadow: none; border: none; text-align: center; background: transparent;">
+                <div style="font-size: 40px; margin-bottom: 15px;">🧠</div>
+                <h3 style="font-size: 18px;">Smart Qualification</h3>
+                <p style="font-size: 14px; color: var(--slate);">AI assesses the HVAC/Plumbing issue, quotes flat-rate pricing, and securely collects client details before booking.</p>
+            </div>
+            <div class="service-card" style="box-shadow: none; border: none; text-align: center; background: transparent;">
+                <div style="font-size: 40px; margin-bottom: 15px;">📱</div>
+                <h3 style="font-size: 18px;">SMS Dispatch <span class="pro-badge">PRO FEATURE</span></h3>
+                <p style="font-size: 14px; color: var(--slate);">Live Google Calendar syncing and instant WhatsApp/SMS notifications sent directly to your field mechanics.</p>
+            </div>
+        </div>
+    </section>
 
     <!-- Services Section -->
     <section class="services-section">
-        <div class="section-title">
+        <div class="section-title fade-in">
             <h2>Our Core Services</h2>
             <p>Select a service or chat directly with our AI dispatcher for instant custom quotes.</p>
         </div>
 
         <div class="services-grid">
-            <div class="service-card">
+            <div class="service-card fade-in delay-1">
                 <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80&w=600')"></div>
                 <div class="service-content">
                     <span class="service-tag">Maintenance</span>
@@ -215,7 +106,7 @@
                 </div>
             </div>
 
-            <div class="service-card">
+            <div class="service-card fade-in delay-2">
                 <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&q=80&w=600')"></div>
                 <div class="service-content">
                     <span class="service-tag">Emergency Repair</span>
@@ -227,7 +118,7 @@
                 </div>
             </div>
 
-            <div class="service-card">
+            <div class="service-card fade-in delay-3">
                 <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1542013936693-8942b260a92d?auto=format&fit=crop&q=80&w=600')"></div>
                 <div class="service-content">
                     <span class="service-tag">Plumbing</span>
@@ -255,7 +146,6 @@
         <div class="chat-box" id="chat-box">
             <div class="msg bot">Hi there! Need an AC repair or plumbing fix? Let me know how I can help.</div>
             
-            <!-- TYPING INDICATOR ADDED -->
             <div id="typing-indicator" class="typing-indicator">
                 <span></span><span></span><span></span>
             </div>
@@ -266,161 +156,7 @@
         </div>
     </div>
 
-<script>
-        // --- 100% BULLETPROOF CLOUDFLARE URL ---
-        const N8N_WEBHOOK_URL = "https://ships-generators-relative-wma.trycloudflare.com/webhook/apex-web-chat";
-        
-        let isSending = false;
-
-        function toggleBackend() { document.getElementById('backendPanel').classList.toggle('open'); }
-
-        function toggleChat() {
-            const chat = document.getElementById('chatContainer');
-            const toggleBtn = document.getElementById('chatToggleBtn');
-            chat.classList.toggle('open');
-            toggleBtn.classList.toggle('hidden');
-            if (chat.classList.contains('open')) document.getElementById('user-input').focus();
-        }
-
-        // Only auto-open chat if screen is larger than a phone
-        setTimeout(() => {
-            if (window.innerWidth > 768) {
-                const chat = document.getElementById('chatContainer');
-                const toggleBtn = document.getElementById('chatToggleBtn');
-                if (!chat.classList.contains('open')) {
-                    chat.classList.add('open');
-                    toggleBtn.classList.add('hidden');
-                }
-            }
-        }, 2000);
-
-        function openChatWithPrefill(text) {
-            const chat = document.getElementById('chatContainer');
-            const toggleBtn = document.getElementById('chatToggleBtn');
-            chat.classList.add('open');
-            toggleBtn.classList.add('hidden');
-            const input = document.getElementById('user-input');
-            input.value = text;
-            input.style.height = "auto";
-            input.style.height = (input.scrollHeight) + "px";
-            input.focus();
-        }
-
-        const userInput = document.getElementById("user-input");
-        userInput.addEventListener("input", function() {
-            this.style.height = "auto";
-            this.style.height = (this.scrollHeight) + "px";
-        });
-
-        const sessionId = "session_" + Math.floor(Math.random() * 1000000000);
-        const chatBox = document.getElementById("chat-box");
-        const sendBtn = document.getElementById("send-btn");
-        const typingIndicator = document.getElementById("typing-indicator");
-
-        function appendMessage(text, sender) {
-            const msgDiv = document.createElement("div");
-            msgDiv.className = `msg ${sender}`;
-            msgDiv.innerHTML = text; 
-            chatBox.insertBefore(msgDiv, typingIndicator);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-
-        function appendButtons(buttonsArray) {
-            if (!buttonsArray || buttonsArray.length === 0) return;
-            const container = document.createElement("div");
-            container.className = "btn-container";
-
-            buttonsArray.forEach(btnText => {
-                const btn = document.createElement("button");
-                btn.className = "quick-reply";
-                btn.innerText = btnText;
-                btn.onclick = () => {
-                    container.style.display = "none";
-                    userInput.value = "I want to book " + btnText;
-                    userInput.style.height = "auto";
-                    sendMessage();
-                };
-                container.appendChild(btn);
-            });
-            chatBox.insertBefore(container, typingIndicator);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-        
-        function showTyping() { typingIndicator.style.display = "flex"; chatBox.scrollTop = chatBox.scrollHeight; }
-        function hideTyping() { typingIndicator.style.display = "none"; }
-
-        async function sendMessage() {
-            if (isSending) return;
-            const text = userInput.value.trim();
-            if (!text) return;
-
-            isSending = true;
-            appendMessage(text, "user");
-            userInput.value = "";
-            userInput.style.height = "auto";
-            userInput.disabled = true;
-            sendBtn.disabled = true;
-            
-            showTyping();
-
-            try {
-                // CLEAN URL FOR CLOUDFLARE
-                const liveUrl = N8N_WEBHOOK_URL + "?t=" + Date.now();
-                
-                const response = await fetch(liveUrl, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ sessionId: sessionId, message: text })
-                });
-
-                const data = await response.json();
-                
-                hideTyping();
-                appendMessage(data.text || "Sorry, I encountered an error.", "bot");
-                if (data.buttons) { appendButtons(data.buttons); }
-
-                // --- LIVE EMAIL TERMINAL SIMULATION LOGIC ---
-                if (data.trigger_follow_up === true || data.trigger_follow_up === "true") {
-                    const smsTerminal = document.getElementById("smsTerminal");
-                    const panel = document.getElementById("backendPanel");
-                    
-                    if (!panel.classList.contains("open")) panel.classList.add("open");
-
-                    smsTerminal.innerHTML += `<br><span style="color: #f59e0b;">> [LEAD ACQUIRED] Auto-Follow-up Sequence queued for ${data.lead_name || 'Client'} (${data.lead_email || 'Email'}). Dispatching in 60s...</span><br>`;
-                    smsTerminal.scrollTop = smsTerminal.scrollHeight;
-
-                    setTimeout(() => {
-                        const time = new Date().toLocaleTimeString();
-                        const smsMsg = `Hi ${data.lead_name || 'there'}, it's Apex Home Services. Checking in on your booking! Did you still need an estimate for the ${data.car_issue || 'repair'}? Let us know!`;
-                        
-                        smsTerminal.innerHTML += `<br><span style="color: #34d399;">[${time}] > EMAIL DISPATCHED SUCCESSFULLY</span><br>`;
-                        smsTerminal.innerHTML += `<span style="color: white;">TO: ${data.lead_email || 'Unknown Email'}</span><br>`;
-                        smsTerminal.innerHTML += `<span style="color: #94a3b8;">PAYLOAD: "${smsMsg}"</span><br>`;
-                        smsTerminal.scrollTop = smsTerminal.scrollHeight;
-                    }, 60000); 
-                }
-
-            } catch (error) {
-                hideTyping();
-                console.error("Transmission Error:", error);
-                appendMessage("Network error or outdated browser detected. Please check your connection or call us directly.", "bot");
-                
-                const errorTrace = `[DIAGNOSTIC TRACE]<br>Error: ${error.name}<br>Message: ${error.message}<br>Check n8n CORS settings or Cloudflare connection!`;
-                appendMessage(`<div style="font-size: 11px; color: #e11d48; margin-top: 8px; border-top: 1px solid rgba(225,29,72,0.2); padding-top: 8px; font-family: monospace; line-height: 1.3;">${errorTrace}</div>`, "bot");
-            } finally {
-                userInput.disabled = false;
-                sendBtn.disabled = false;
-                userInput.focus();
-                isSending = false;
-            }
-        }
-
-        function handleKeyPress(e) {
-            if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                sendMessage();
-            }
-        }
-    </script>
+    <!-- External JS -->
+    <script src="script.js"></script>
 </body>
 </html>
