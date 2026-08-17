@@ -3,7 +3,7 @@
 <head>
     <!-- 1. THE SELF-HEALING CACHE BUSTER -->
     <script>
-        const currentVersion = "2.0"; 
+        const currentVersion = "2.1"; 
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('v') !== currentVersion) {
             window.location.replace(window.location.pathname + '?v=' + currentVersion);
@@ -13,235 +13,215 @@
     <!-- 2. MOBILE ZOOM FIX -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, interactive-widget=resizes-content">
     <meta charset="UTF-8">
-    <title>SoCal Auto Works | AI-Powered Diagnostics</title>
+    <title>Epic Event Rentals | Instant AI Booking</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
         
         :root {
-            --bg-base: #050505;
-            --bg-surface: #121212;
-            --bg-elevated: #1e1e1e;
-            --primary: #e11d48; /* Crimson Red */
-            --primary-glow: rgba(225, 29, 72, 0.4);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: #27272a;
+            --primary: #8b5cf6; /* Vibrant Purple */
+            --secondary: #f59e0b; /* Bright Yellow/Orange */
+            --dark: #1e1b4b;
+            --light: #f5f3ff;
+            --white: #ffffff;
         }
 
-        * { box-sizing: border-box; }
-        body { font-family: 'Outfit', sans-serif; margin: 0; padding: 0; background: var(--bg-base); color: var(--text-main); overflow-x: hidden; scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background: var(--light); color: var(--dark); overflow-x: hidden; }
+
+        /* --- ENTRANCE ANIMATIONS TO MAKE IT FEEL ALIVE --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { opacity: 0; animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.3s; }
         
-        /* Premium Navbar */
-        header { background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(12px); padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 50; border-bottom: 1px solid var(--border-color); }
-        .logo { font-size: 22px; font-weight: 800; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; text-transform: uppercase; }
+        @keyframes bounce-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); transform: translateY(0); }
+            50% { box-shadow: 0 0 0 15px rgba(245, 158, 11, 0); transform: translateY(-5px); }
+            100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); transform: translateY(0); }
+        }
+        
+        header { background: var(--white); padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 50; }
+        
+        /* --- NEW BACK BUTTON --- */
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .back-btn { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: var(--light); color: var(--primary); border: 1px solid var(--primary); text-decoration: none; transition: 0.3s; }
+        .back-btn:hover { background: var(--primary); color: var(--white); transform: translateX(-3px); }
+
+        .logo { font-size: 24px; font-weight: 800; color: var(--dark); letter-spacing: -0.5px; }
         .logo span { color: var(--primary); }
         
-        .dev-btn { background: transparent; color: var(--text-main); border: 1px solid var(--border-color); padding: 10px 20px; border-radius: 4px; font-weight: 600; font-size: 13px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; }
-        .dev-btn:hover { border-color: var(--primary); box-shadow: 0 0 15px var(--primary-glow); }
+        .dev-btn { background: var(--light); color: var(--primary); border: 2px solid var(--primary); padding: 10px 20px; border-radius: 30px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .dev-btn:hover { background: var(--primary); color: var(--white); }
 
-        /* Asymmetric Hero Section */
-        .hero { position: relative; padding: 160px 60px 100px; display: flex; align-items: center; justify-content: space-between; min-height: 85vh; background: radial-gradient(circle at 80% 50%, rgba(225,29,72,0.1) 0%, transparent 50%); }
-        .hero-content { max-width: 650px; z-index: 2; }
-        .tech-badge { display: inline-block; padding: 6px 12px; background: rgba(225, 29, 72, 0.1); border-left: 3px solid var(--primary); color: var(--primary); font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
-        .hero h1 { font-size: 64px; font-weight: 800; margin: 0 0 24px 0; line-height: 1.1; letter-spacing: -1px; }
-        .hero p { font-size: 18px; color: var(--text-muted); line-height: 1.6; margin-bottom: 40px; max-width: 500px; }
-        .hero-img { position: absolute; right: 0; top: 0; width: 50%; height: 100%; background: url('https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&q=80&w=1200') center/cover; -webkit-mask-image: linear-gradient(to right, transparent, black 30%); mask-image: linear-gradient(to right, transparent, black 30%); z-index: 1; opacity: 0.8; }
+        .hero { background: linear-gradient(rgba(30, 27, 75, 0.8), rgba(30, 27, 75, 0.9)), url('https://images.unsplash.com/photo-1574259392081-dbe3c19cd15e?auto=format&fit=crop&q=80&w=1920') center/cover; color: var(--white); padding: 140px 20px; text-align: center; }
+        .hero h1 { font-size: 56px; font-weight: 800; margin: 0 0 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .hero p { font-size: 20px; max-width: 600px; margin: 0 auto; opacity: 0.9; }
 
-        /* Sleek Stats Strip */
-        .stats-strip { display: flex; background: var(--bg-surface); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 0 60px; }
-        .stat-box { flex: 1; padding: 30px; border-right: 1px solid var(--border-color); }
-        .stat-box:last-child { border-right: none; }
-        .stat-val { font-size: 24px; font-weight: 800; color: var(--primary); margin-bottom: 5px; }
-        .stat-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
-
-        /* Minimalist Services Section */
-        .services-section { padding: 100px 60px; max-width: 1400px; margin: 0 auto; }
-        .section-header { margin-bottom: 60px; }
-        .section-header h2 { font-size: 40px; margin: 0 0 10px 0; }
-        .section-header p { color: var(--text-muted); font-size: 16px; margin: 0; }
+        .inventory-section { max-width: 1200px; margin: 80px auto; padding: 0 20px; }
+        .inventory-header { text-align: center; margin-bottom: 50px; }
+        .inventory-header h2 { font-size: 36px; color: var(--primary); margin-bottom: 10px; }
         
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
-        .service-card { background: var(--bg-surface); border: 1px solid var(--border-color); padding: 40px 30px; border-radius: 8px; transition: all 0.3s ease; position: relative; overflow: hidden; }
-        .service-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--primary); transform: scaleY(0); transition: transform 0.3s ease; }
-        .service-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .service-card:hover::before { transform: scaleY(1); }
-        .service-icon { font-size: 32px; margin-bottom: 20px; }
-        .service-card h3 { font-size: 22px; margin: 0 0 15px 0; }
-        .service-card p { color: var(--text-muted); font-size: 15px; line-height: 1.6; margin-bottom: 30px; }
-        .service-action { color: var(--primary); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
-        .service-action:hover { text-decoration: underline; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s; border: 2px solid transparent; }
+        .card:hover { transform: translateY(-10px); border-color: var(--secondary); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.15); }
+        .card-img { height: 220px; background-size: cover; background-position: center; transition: transform 0.5s; }
+        .card:hover .card-img { transform: scale(1.05); }
+        
+        .card-content { padding: 30px; position: relative; z-index: 2; background: var(--white); }
+        .price-tag { display: inline-block; background: var(--secondary); color: var(--dark); font-weight: 800; padding: 5px 15px; border-radius: 20px; font-size: 14px; margin-bottom: 15px; }
+        .card h3 { margin: 0 0 10px; font-size: 22px; }
+        .card p { color: #6b7280; font-size: 15px; margin-bottom: 20px; }
+        .book-btn { width: 100%; background: var(--primary); color: var(--white); border: none; padding: 12px; border-radius: 10px; font-weight: 600; font-size: 16px; cursor: pointer; transition: 0.2s; }
+        .book-btn:hover { background: #7c3aed; }
 
-        /* Floating Dark Chat Button */
-        .chat-toggle { position: fixed; bottom: 40px; right: 40px; width: 65px; height: 65px; border-radius: 50%; background: var(--primary); color: white; border: none; font-size: 24px; box-shadow: 0 10px 25px var(--primary-glow); cursor: pointer; z-index: 100; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; justify-content: center; }
-        .chat-toggle:hover { transform: scale(1.1); }
-        .chat-toggle.hidden { transform: scale(0) rotate(90deg); opacity: 0; pointer-events: none; }
+        /* Chat Toggle Button */
+        .chat-toggle { position: fixed; bottom: 30px; right: 30px; width: 70px; height: 70px; border-radius: 50%; background: var(--secondary); color: var(--dark); border: none; font-size: 30px; cursor: pointer; z-index: 100; transition: transform 0.3s; display: flex; align-items: center; justify-content: center; animation: bounce-pulse 2.5s infinite; }
+        .chat-toggle:hover { transform: scale(1.1); animation: none; }
+        .chat-toggle.hidden { transform: scale(0); opacity: 0; pointer-events: none; }
 
-        /* Dark Mode Chat Widget */
-        .chat-container { position: fixed; bottom: 40px; right: 40px; width: 380px; background: var(--bg-surface); border-radius: 16px; box-shadow: 0 30px 60px rgba(0,0,0,0.6); display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--border-color); z-index: 101; transform: scale(0); transform-origin: bottom right; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); opacity: 0; pointer-events: none; }
+        /* Floating Chat Widget */
+        .chat-container { position: fixed; bottom: 30px; right: 30px; width: 380px; background: var(--white); border-radius: 24px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); display: flex; flex-direction: column; overflow: hidden; border: 1px solid #e5e7eb; z-index: 101; transform: scale(0); transform-origin: bottom right; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease; opacity: 0; pointer-events: none; }
         .chat-container.open { transform: scale(1); opacity: 1; pointer-events: auto; }
+        .chat-header { background: var(--primary); color: var(--white); padding: 20px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+        .close-chat-btn { background: none; border: none; color: var(--white); font-size: 24px; cursor: pointer; opacity: 0.8; transition: transform 0.3s; }
+        .close-chat-btn:hover { opacity: 1; transform: rotate(90deg); }
         
-        .chat-header { background: var(--bg-elevated); padding: 20px; font-weight: 600; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-color); }
-        .chat-header-left { display: flex; align-items: center; gap: 10px; font-size: 15px; }
-        .chat-header .dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); }
-        .close-chat-btn { background: none; border: none; color: var(--text-muted); font-size: 22px; cursor: pointer; transition: color 0.2s; }
-        .close-chat-btn:hover { color: white; }
+        .chat-box { height: 400px; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; background: #faf5ff; scroll-behavior: smooth;}
+        .msg { max-width: 85%; padding: 12px 16px; border-radius: 18px; font-size: 14px; line-height: 1.4; word-wrap: break-word; animation: fadeInUp 0.3s ease;}
+        .msg.bot { background: var(--white); align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #ede9fe; }
+        .msg.user { background: var(--primary); color: var(--white); align-self: flex-end; border-bottom-right-radius: 4px; }
         
-        .chat-box { height: 400px; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; background: var(--bg-base); }
-        .msg { max-width: 85%; padding: 14px 18px; border-radius: 12px; font-size: 14px; line-height: 1.5; }
-        .msg.bot { background: var(--bg-elevated); color: var(--text-main); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid var(--border-color); }
-        .msg.user { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
-        
-        .chat-input-area { padding: 15px; background: var(--bg-elevated); border-top: 1px solid var(--border-color); display: flex; gap: 10px; }
-        input[type="text"] { flex: 1; padding: 14px; background: var(--bg-base); border: 1px solid var(--border-color); color: white; border-radius: 8px; outline: none; font-size: 14px; transition: border 0.2s; font-family: 'Outfit', sans-serif; }
-        input[type="text"]:focus { border-color: var(--primary); }
-        .send-btn { background: var(--primary); color: white; border: none; padding: 0 20px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: background 0.2s; font-family: 'Outfit', sans-serif; }
-        .send-btn:hover { background: #be123c; }
-        .send-btn:disabled { background: var(--border-color); color: var(--text-muted); cursor: not-allowed; }
+        /* --- TYPING INDICATOR --- */
+        .typing-indicator { display: none; align-items: center; gap: 4px; padding: 12px 16px; width: fit-content; background: var(--white); align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #ede9fe; border-radius: 18px;}
+        .typing-indicator span { display: block; width: 6px; height: 6px; background-color: #94a3b8; border-radius: 50%; animation: typing 1.4s infinite ease-in-out both; }
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
 
-        /* Hacker-Style Dev Panel */
-        .backend-panel { position: fixed; top: 0; left: -650px; width: 600px; height: 100vh; background: #000; color: #33ff33; z-index: 200; padding: 40px; box-sizing: border-box; overflow-y: auto; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); border-right: 1px solid #33ff33; font-family: monospace; }
+        /* --- AUTO-EXPANDING TEXTAREA --- */
+        .chat-input-area { padding: 15px; background: var(--white); border-top: 1px solid #ede9fe; display: flex; gap: 10px; align-items: flex-end; }
+        textarea#user-input { flex: 1; padding: 12px; border: 1px solid #e5e7eb; border-radius: 12px; outline: none; font-family: 'Poppins', sans-serif; resize: none; max-height: 120px; min-height: 20px; box-sizing: border-box; overflow-y: hidden; line-height: 1.5; transition: border 0.3s;}
+        textarea#user-input:focus { border-color: var(--primary); }
+        .send-btn { background: var(--secondary); color: var(--dark); border: none; padding: 0 20px; border-radius: 12px; cursor: pointer; font-weight: 600; font-family: 'Poppins', sans-serif; display: flex; align-items: center; justify-content: center; height: 44px; margin-bottom: 2px;}
+
+        /* Backend Panel */
+        .backend-panel { position: fixed; top: 0; left: -650px; width: 600px; height: 100vh; background: var(--white); z-index: 200; padding: 40px; box-sizing: border-box; overflow-y: auto; transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 20px 0 50px rgba(0,0,0,0.2); }
         .backend-panel.open { left: 0; }
-        .backend-panel h2 { margin-top: 0; border-bottom: 1px dashed #33ff33; padding-bottom: 15px; color: #fff; display: flex; align-items: center; justify-content: space-between; font-size: 16px; letter-spacing: 2px; }
-        .panel-close-btn { background: transparent; color: #33ff33; border: none; font-size: 24px; cursor: pointer; }
-        .backend-panel p { color: #888; font-size: 12px; }
-        .iframe-container { margin-bottom: 30px; border: 1px solid #33ff33; height: 350px; position: relative; }
-        .iframe-container iframe { width: 100%; height: 100%; border: none; filter: invert(1) hue-rotate(180deg) grayscale(1); }
-        .panel-label { font-size: 11px; text-transform: uppercase; color: #33ff33; margin-bottom: 8px; display: block; letter-spacing: 1px; }
+        .panel-close-btn { position: absolute; top: 30px; right: 30px; background: none; border: none; font-size: 28px; cursor: pointer; color: var(--dark); transition: transform 0.3s;}
+        .panel-close-btn:hover { transform: rotate(90deg); }
+        .iframe-container { margin-bottom: 30px; border-radius: 12px; overflow: hidden; height: 350px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border: 1px solid #e5e7eb; }
+        .iframe-container iframe { width: 100%; height: 100%; border: none; }
+        .panel-label { font-size: 12px; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-bottom: 10px; display: block; letter-spacing: 1px; }
         
-        /* New Terminal Style */
-        .sms-terminal { background: #050505; color: #33ff33; padding: 15px; border: 1px solid #33ff33; height: 180px; overflow-y: auto; font-size: 13px; line-height: 1.5; }
+        .stripe-alert { background: #ecfdf5; border: 1px solid #10b981; color: #047857; padding: 15px; border-radius: 12px; display: none; font-size: 13px; font-weight: 600; margin-bottom: 20px; animation: fadeInUp 0.4s ease; }
 
-        /* Mobile Adjustments */
         @media (max-width: 768px) {
             header { padding: 15px 20px; }
-            .hero { padding: 120px 20px 60px; flex-direction: column; text-align: center; }
-            .hero-img { width: 100%; opacity: 0.3; mask-image: none; -webkit-mask-image: none; }
-            .hero h1 { font-size: 42px; }
-            .stats-strip { flex-direction: column; padding: 0; }
-            .stat-box { border-right: none; border-bottom: 1px solid var(--border-color); text-align: center; }
-            .services-section { padding: 60px 20px; }
+            .hero { padding: 120px 20px 80px; }
+            .hero h1 { font-size: 40px; }
             .backend-panel { width: 100%; left: -100%; padding: 20px; }
-            .chat-toggle { bottom: 20px; right: 20px; }
             .chat-container { width: calc(100% - 40px); right: 20px; bottom: 20px; }
+            .chat-toggle { bottom: 20px; right: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Diagnostic Terminal (Dev Mode) -->
+    <!-- Backend Dev Panel -->
     <div class="backend-panel" id="backendPanel">
-        <h2>
-            <span>[ SYSTEM_ARCHITECTURE_TERMINAL ]</span>
-            <button class="panel-close-btn" onclick="toggleBackend()">[X]</button>
-        </h2>
-        <p>> INITIALIZING LIVE TELEMETRY...<br>> MONITORING WEBHOOK TRAFFIC...<br>> AWAITING DATABASE SYNC...</p>
+        <button class="panel-close-btn" onclick="toggleBackend()">×</button>
+        <h2 style="margin-top:0; color: var(--dark);">⚙️ Inventory Control Room</h2>
+        <p style="color: #6b7280; font-size: 14px; margin-bottom: 30px;">The AI reads this live Google Calendar to prevent double-bookings, then issues Stripe links automatically.</p>
         
-        <!-- Replaced SMS with Email Dispatch Terminal -->
-        <span class="panel-label">>> EMAIL_OUTBOUND_DISPATCHER</span>
-        <div class="sms-terminal" id="smsTerminal">
-            > EMAIL MODULE ONLINE. AWAITING TRIGGERS...<br>
+        <div class="stripe-alert" id="stripeAlert">
+            💳 STRIPE CHECKOUT INITIATED: The AI just deployed a live payment link for the customer.
         </div>
 
-        <span class="panel-label" style="margin-top: 30px;">>> LEAD_DATABASE_CONNECTION</span>
+        <span class="panel-label">Live Inventory Calendar</span>
         <div class="iframe-container">
-            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2No54tpOdLhI3xUyJf0few-si1qAvoKpib1KIuZM7AlQiJElqZCGtOXKL1PQQqC1vtlB3IyA4wdmW/pubhtml?gid=1185723188&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+            <iframe src="https://calendar.google.com/calendar/embed?src=sakuramisakikawaii%40gmail.com&ctz=Asia%2FManila&mode=WEEK"></iframe>
+        </div>
+
+        <span class="panel-label">Lead Database</span>
+        <div class="iframe-container">
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2No54tpOdLhI3xUyJf0few-si1qAvoKpib1KIuZM7AlQiJElqZCGtOXKL1PQQqC1vtlB3IyA4wdmW/pubhtml?gid=816046492&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
         </div>
     </div>
 
-    <!-- Navigation Header -->
+    <!-- Header -->
     <header>
-        <div class="logo">SoCal <span>AutoWorks</span></div>
-        <button class="dev-btn" onclick="toggleBackend()">[ Access Terminal ]</button>
+        <div class="header-left">
+            <a href="https://mitsuuki.github.io/demo-hub/" class="back-btn" title="Back to Hub">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            </a>
+            <div class="logo">Epic <span>Events</span></div>
+        </div>
+        <button class="dev-btn" onclick="toggleBackend()">View Backend (Dev Mode)</button>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero">
-        <div class="hero-img"></div>
-        <div class="hero-content">
-            <div class="tech-badge">Powered by AI • Hablamos Español</div>
-            <h1>Stop Missing Leads in the Shop.</h1>
-            <p>While you are under the hood, our bilingual AI Receptionist answers questions, logs vehicle issues, and automates your follow-ups instantly.</p>
-            <div style="display: flex; gap: 15px; margin-top: 30px;">
-                <button class="dev-btn" style="background: var(--primary); color: white; border: none;" onclick="openChatWithPrefill('Hola, necesito ayuda con mi carro')">Test AI Spanish</button>
-                <button class="dev-btn" onclick="openChatWithPrefill('I need a repair estimate')">Test AI English</button>
+        <h1 class="fade-in">Turn Your Backyard Into A Bash.</h1>
+        <p class="fade-in delay-1">Chat with our AI to check live calendar availability and book your bounce house instantly.</p>
+    </section>
+
+    <!-- Inventory -->
+    <section class="inventory-section">
+        <div class="inventory-header fade-in delay-2">
+            <h2>Current Inventory</h2>
+            <p style="color: #6b7280;">Inventory syncs directly with our Google Calendar.</p>
+        </div>
+        <div class="grid">
+            <div class="card fade-in delay-1">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?auto=format&fit=crop&q=80&w=600');"></div>
+                <div class="card-content">
+                    <span class="price-tag">$150 / day</span>
+                    <h3>Classic Castle</h3>
+                    <p>Perfect for birthdays and block parties. Standard 15x15 footprint.</p>
+                    <button class="book-btn" onclick="openChatWithPrefill('I want to book the Classic Castle')">Check Availability &rarr;</button>
+                </div>
+            </div>
+            <div class="card fade-in delay-2">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1563823250269-826d15a5bb1d?auto=format&fit=crop&q=80&w=600');"></div>
+                <div class="card-content">
+                    <span class="price-tag">$250 / day</span>
+                    <h3>Tropical Slide</h3>
+                    <p>Beat the heat with this 18-foot inflatable water slide.</p>
+                    <button class="book-btn" onclick="openChatWithPrefill('I want to book the Tropical Slide')">Check Availability &rarr;</button>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Stats Strip -->
-    <div class="stats-strip">
-        <div class="stat-box">
-            <div class="stat-val">24/7</div>
-            <div class="stat-label">Instant Responses</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-val">100%</div>
-            <div class="stat-label">Bilingual Support</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-val">3-Day</div>
-            <div class="stat-label">Automated Follow-ups</div>
-        </div>
-    </div>
+    <!-- Chat Widget -->
+    <button class="chat-toggle" id="chatToggleBtn" onclick="toggleChat()">🎈</button>
 
-    <!-- Minimalist Services Section -->
-    <section class="services-section">
-        <div class="section-header">
-            <h2>Supported Workflows</h2>
-            <p>Click a module to test the live AI extraction protocols.</p>
-        </div>
-
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">⚙️</div>
-                <h3>Engine Diagnostics</h3>
-                <p>Automate data collection for Check Engine lights, weird noises, and poor performance before the car hits the lot.</p>
-                <div class="service-action" onclick="openChatWithPrefill('My check engine light is flashing')">Run Test Scenario &rarr;</div>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon">🛑</div>
-                <h3>Brake Services</h3>
-                <p>Instantly qualify leads looking for pad replacements, rotor resurfacing, or fluid flushes.</p>
-                <div class="service-action" onclick="openChatWithPrefill('I need new brake pads for my 2018 Honda Civic')">Run Test Scenario &rarr;</div>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon">🛢️</div>
-                <h3>Routine Maintenance</h3>
-                <p>Handle high-volume, low-ticket requests like oil changes and tire rotations without lifting a finger.</p>
-                <div class="service-action" onclick="openChatWithPrefill('How much for a synthetic oil change?')">Run Test Scenario &rarr;</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Chat Toggle Button -->
-    <button class="chat-toggle" id="chatToggleBtn" onclick="toggleChat()">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-    </button>
-
-    <!-- Dark Mode Floating Chat Widget -->
     <div class="chat-container" id="chatContainer">
         <div class="chat-header">
-            <div class="chat-header-left">
-                <div class="dot"></div> SoCal Auto Assistant
-            </div>
+            Epic Events AI Booking
             <button class="close-chat-btn" onclick="toggleChat()">×</button>
         </div>
         <div class="chat-box" id="chat-box">
-            <div class="msg bot">Hi! Welcome to SoCal Auto Works. I can help with estimates or logging your repair. What kind of car do you have, and what's the issue?<br><br><span style="color: var(--text-muted); font-size: 12px;">(¡Hola! También hablo español. ¿En qué le puedo ayudar?)</span></div>
+            <div class="msg bot">Hi! Ready to party? Let me know what you want to rent and for what date, and I'll check our live inventory!</div>
+            
+            <!-- Typing Indicator -->
+            <div id="typing-indicator" class="typing-indicator">
+                <span></span><span></span><span></span>
+            </div>
         </div>
         <div class="chat-input-area">
-            <input type="text" id="user-input" placeholder="Message..." onkeypress="handleKeyPress(event)">
+            <textarea id="user-input" rows="1" placeholder="Type here..." onkeydown="handleKeyPress(event)"></textarea>
             <button class="send-btn" id="send-btn" onclick="sendMessage()">Send</button>
         </div>
     </div>
 
     <script>
-        // --- 3. NGROK URL WITH LIVE TIMESTAMP CACHE-BUSTER ---
-        const N8N_WEBHOOK_URL = "https://helper-rubbing-refrain.ngrok-free.dev/webhook/apex-repair-chat?t=" + Date.now();
-        
-        let isSending = false;
+        // --- BASE NGROK URL ---
+        const BASE_WEBHOOK_URL = "https://helper-rubbing-refrain.ngrok-free.dev/webhook/party-rental-chat";
+
+        let isSending = false; // DOUBLE-ENTRY LOCK
 
         function toggleBackend() {
             document.getElementById('backendPanel').classList.toggle('open');
@@ -257,6 +237,7 @@
             }
         }
 
+        // Open chat automatically after 2 seconds
         setTimeout(() => {
             const chat = document.getElementById('chatContainer');
             const toggleBtn = document.getElementById('chatToggleBtn');
@@ -264,7 +245,7 @@
                 chat.classList.add('open');
                 toggleBtn.classList.add('hidden');
             }
-        }, 1500);
+        }, 2000);
 
         function openChatWithPrefill(text) {
             const chat = document.getElementById('chatContainer');
@@ -273,20 +254,47 @@
             toggleBtn.classList.add('hidden');
             const input = document.getElementById('user-input');
             input.value = text;
+            
+            // Auto-resize textarea
+            input.style.height = "auto";
+            input.style.height = (input.scrollHeight) + "px";
+            
             input.focus();
         }
 
+        // Auto-expanding textarea logic
+        const userInput = document.getElementById("user-input");
+        userInput.addEventListener("input", function() {
+            this.style.height = "auto";
+            this.style.height = (this.scrollHeight) + "px";
+        });
+
         const sessionId = "session_" + Math.floor(Math.random() * 1000000000);
         const chatBox = document.getElementById("chat-box");
-        const userInput = document.getElementById("user-input");
         const sendBtn = document.getElementById("send-btn");
+        const typingIndicator = document.getElementById("typing-indicator");
 
         function appendMessage(text, sender) {
             const msgDiv = document.createElement("div");
             msgDiv.className = `msg ${sender}`;
+            
+            // Transform Stripe links into a sleek popup window instead of a new tab
+            if(text.includes('stripe.com')) {
+                text = text.replace(/(https:\/\/(buy|book)\.stripe\.com\/[^\s]+)/g, '<a href="#" onclick="window.open(\'$1\', \'StripeCheckout\', \'width=450,height=750,top=100,left=100,resizable=yes,scrollbars=yes\'); return false;" style="color:var(--primary); font-weight:bold; text-decoration:underline; cursor:pointer;">Click Here to Pay via Stripe &rarr;</a>');
+            }
+            
             msgDiv.innerHTML = text; 
-            chatBox.appendChild(msgDiv);
+            chatBox.insertBefore(msgDiv, typingIndicator);
             chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function showTyping() {
+            typingIndicator.style.display = "flex";
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function hideTyping() {
+            typingIndicator.style.display = "none";
         }
 
         async function sendMessage() {
@@ -299,12 +307,17 @@
 
             appendMessage(text, "user");
             userInput.value = "";
+            userInput.style.height = "auto";
             userInput.disabled = true;
             sendBtn.disabled = true;
-            sendBtn.innerText = "...";
+
+            showTyping();
 
             try {
-                const response = await fetch(N8N_WEBHOOK_URL, {
+                // Dynamically add cache-busting timestamp on every request
+                const liveUrl = BASE_WEBHOOK_URL + "?t=" + Date.now();
+                
+                const response = await fetch(liveUrl, {
                     method: "POST",
                     headers: { 
                         "Content-Type": "application/json",
@@ -314,46 +327,37 @@
                 });
 
                 const data = await response.json();
-                
+                hideTyping();
                 appendMessage(data.text || "Sorry, I encountered an error.", "bot");
 
-                if (data.trigger_follow_up === true || data.trigger_follow_up === "true") {
-                    const smsTerminal = document.getElementById("smsTerminal");
+                // If AI deployed the Stripe link, show the green alert in the Dev Panel
+                if(data.ready_to_pay === true || data.ready_to_pay === "true") {
+                    document.getElementById("stripeAlert").style.display = "block";
                     const panel = document.getElementById("backendPanel");
-                    
                     if (!panel.classList.contains("open")) {
                         panel.classList.add("open");
                     }
-
-                    smsTerminal.innerHTML += `<br><span style="color: #f59e0b;">> [LEAD ACQUIRED] Auto-Follow-up Sequence queued for ${data.lead_name || 'Client'} (${data.lead_email || 'Email'}). Dispatching in 60s...</span><br>`;
-                    smsTerminal.scrollTop = smsTerminal.scrollHeight;
-
-                    setTimeout(() => {
-                        const time = new Date().toLocaleTimeString();
-                        const smsMsg = `Hi ${data.lead_name || 'there'}, it's SoCal Auto Works. Checking in on your vehicle! Did you still need an estimate for the ${data.car_issue || 'repair'}? Let us know!`;
-                        
-                        smsTerminal.innerHTML += `<br><span style="color: #34d399;">[${time}] > EMAIL DISPATCHED SUCCESSFULLY</span><br>`;
-                        smsTerminal.innerHTML += `<span style="color: white;">TO: ${data.lead_email || 'Unknown Email'}</span><br>`;
-                        smsTerminal.innerHTML += `<span style="color: #94a3b8;">PAYLOAD: "${smsMsg}"</span><br>`;
-                        smsTerminal.scrollTop = smsTerminal.scrollHeight;
-                    }, 60000); 
                 }
 
             } catch (error) {
-                // 4. GRACEFUL ERROR FALLBACK
+                hideTyping();
                 console.error("Transmission Error:", error);
                 appendMessage("Network error or outdated browser detected. Please check your connection or call us directly.", "bot");
             } finally {
                 userInput.disabled = false;
                 sendBtn.disabled = false;
-                sendBtn.innerText = "Send";
                 userInput.focus();
-                isSending = false;
+                
+                isSending = false; 
             }
         }
 
         function handleKeyPress(e) {
-            if (e.key === "Enter") sendMessage();
+            // Allows Shift+Enter for new line, regular Enter sends message
+            if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
         }
     </script>
 </body>
