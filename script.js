@@ -1,5 +1,5 @@
 // --- 100% BULLETPROOF CLOUDFLARE URL ---
-const N8N_WEBHOOK_URL = 'https://matched-hierarchy-zealand-dui.trycloudflare.com/webhook/hvac-chat';
+const N8N_WEBHOOK_URL = 'https://household-islands-answered-relates.trycloudflare.com/webhook/hvac-chat';
 
 let isSending = false;
 
